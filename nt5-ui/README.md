@@ -5,7 +5,8 @@ A small proxy client for **Windows XP** and **Windows 2000**: a Windows Forms
 [Xray](https://github.com/XTLS/Xray-core) core. Its design follows
 [Nekoray](https://github.com/MatsuriDayo/nekoray) 3.17.
 
-> **Status: 0.9.7-dev1, a development version - not a release.** What has been verified, and where,
+> **Status: 0.9.7-dev1 is a published development release (a GitHub prerelease), not a stable
+> release** - see [Releases](https://github.com/quargelk/NekoRay-NT5/releases). What has been verified, and where,
 > is listed under [Verified so far](#verified-so-far).
 > Overview, screenshots and downloads: [../README.md](../README.md).
 

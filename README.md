@@ -1,5 +1,7 @@
 # NekoRay NT5
 
+[English](README.md) | [Русский](README.ru.md)
+
 A small proxy client for **Windows XP SP3** and **Windows 2000 SP4** (32-bit x86): a Windows Forms
 (.NET Framework 2.0) program that manages servers and subscriptions and runs the
 [Xray](https://github.com/XTLS/Xray-core) 1.8.3 core, built so that it runs on these systems.
@@ -17,8 +19,8 @@ NekoRay maintainers.
 ![Main window](docs/screenshots/main-window.png)
 
 *Main window with example servers (documentation addresses, no real servers). All screenshots on
-this page are captures of the real program taken on a Windows 11 build host with synthetic data;
-screenshots from Windows XP and Windows 2000 will be added.*
+this page are captures of the real program taken on a Windows 11 build host with synthetic data
+(see [Screenshots from Windows XP and Windows 2000](#screenshots-from-windows-xp-and-windows-2000)).*
 
 ## Contents
 
@@ -31,6 +33,7 @@ screenshots from Windows XP and Windows 2000 will be added.*
 - [System Proxy](#system-proxy)
 - [Troubleshooting](#troubleshooting)
 - [Known limitations](#known-limitations)
+- [Screenshots from Windows XP and Windows 2000](#screenshots-from-windows-xp-and-windows-2000)
 - [Building from source](#building-from-source)
 - [License and acknowledgements](#license-and-acknowledgements)
 
@@ -171,8 +174,18 @@ Language: Settings -> General -> Language (applied at the next start).
 - No traffic statistics or connection list; subscriptions are updated by hand (no timer).
 - No TUN / system-wide mode (System Proxy only).
 - Windows 2000: only the configuration in [Tested configurations](#tested-configurations) has been
-  verified. The Diagnostics window shows "Warning" for Windows 2000 by design and names the tested
-  configuration.
+  verified. On Windows 2000 the Diagnostics window shows the status "Note" for the Windows row by
+  design and names the tested configuration.
+
+## Screenshots from Windows XP and Windows 2000
+
+The screenshots above were taken on a Windows 11 build host. Captures from the target systems are
+planned and will be added here once they are taken on real installations:
+
+- the main window on Windows XP SP3 (`windows-xp-main.png`);
+- the Diagnostics window on Windows 2000 SP4 (`windows-2000-diagnostics.png`).
+
+How they are made (synthetic data only): [docs/nt5-screenshots.md](docs/nt5-screenshots.md).
 
 ## Building from source
 
