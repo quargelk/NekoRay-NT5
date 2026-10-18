@@ -18,9 +18,10 @@ NekoRay maintainers.
 
 ![Main window](docs/screenshots/main-window.png)
 
-*Main window with example servers (documentation addresses, no real servers). All screenshots on
-this page are captures of the real program taken on a Windows 11 build host with synthetic data
-(see [Screenshots from Windows XP and Windows 2000](#screenshots-from-windows-xp-and-windows-2000)).*
+*Main window with example servers (documentation addresses, no real servers). The feature gallery
+on this page consists of six captures of the real program taken on a Windows 11 build host with
+synthetic data; screenshots from real Windows XP SP3 and Windows 2000 SP4 systems are in
+[Screenshots from Windows XP and Windows 2000](#screenshots-from-windows-xp-and-windows-2000).*
 
 ## Contents
 
@@ -179,13 +180,22 @@ Language: Settings -> General -> Language (applied at the next start).
 
 ## Screenshots from Windows XP and Windows 2000
 
-The screenshots above were taken on a Windows 11 build host. Captures from the target systems are
-planned and will be added here once they are taken on real installations:
+The six screenshots above were taken on the Windows 11 build host. The two below were captured on
+real Windows XP SP3 and Windows 2000 SP4 systems with the 0.9.7-dev1 package.
 
-- the main window on Windows XP SP3 (`windows-xp-main.png`);
-- the Diagnostics window on Windows 2000 SP4 (`windows-2000-diagnostics.png`).
+![NekoRay NT5 main window on Windows XP SP3](docs/screenshots/windows-xp-main.png)
 
-How they are made (synthetic data only): [docs/nt5-screenshots.md](docs/nt5-screenshots.md).
+*Windows XP SP3: the idle main window with the Russian interface and five synthetic example
+servers (documentation addresses). Not connected; System Proxy is off.*
+
+![NekoRay NT5 Diagnostics on Windows 2000 SP4](docs/screenshots/windows-2000-diagnostics.png)
+
+*Windows 2000 SP4 (build 2195): Diagnostics. Core (`xray.exe`) and Helper (`nt5helper.exe`) are
+present and loadable, the certificate bundle and the local ports are OK, and the Windows row shows
+the status "Note" with the tested configuration (Windows 2000 SP4 x86 without KernelX, with .NET
+Framework 2.0 and the required root certificates).*
+
+How the screenshots were made (synthetic data only): [docs/nt5-screenshots.md](docs/nt5-screenshots.md).
 
 ## Building from source
 
@@ -230,10 +240,8 @@ Third-party components remain under their own licenses:
 - **Go runtime and standard library** (BSD-3-Clause, The Go Authors), including the Windows XP
   backport by BieHDC.
 - **The Windows 2000 patch of the Go toolchain** (`nt5-ui/third_party/go1.20-nt51-nt50.patch`) is
-  specific to this project and distributed under Go's BSD-3-Clause terms. It was developed with
-  Claude Code (an AI coding assistant) under the direction of the NekoRay NT5 maintainer; no separate
-  copyright holder is claimed for these additions. Details:
-  [nt5-ui/third_party/README.md](nt5-ui/third_party/README.md).
+  specific to this project and distributed under Go's BSD-3-Clause terms. Provenance and licence
+  details: [nt5-ui/third_party/README.md](nt5-ui/third_party/README.md).
 - **Mozilla CA bundle** (`cacert.pem`, MPL-2.0), as published by the curl project.
 
 The release package carries all license texts in `licenses\`; `licenses\THIRD-PARTY.txt` lists the

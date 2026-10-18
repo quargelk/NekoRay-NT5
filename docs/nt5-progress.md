@@ -1,6 +1,6 @@
 # NekoRay NT5 — ход работ (этап «1.0»)
 
-Файл для продолжения работы без повторного анализа. Пути вида `NekoRay-NT5-build-lab\...` ниже — локальная
+Журнал разработки: что сделано, проверено и решено (новые записи сверху). Пути вида `NekoRay-NT5-build-lab\...` ниже — локальная
 рабочая папка разработчика (тулчейн, тестовые комплекты в `versions`; комплекты до 0.9.6-rc2 — в архиве
 `baseline\vm-xp-test-history-*.7z`); в репозиторий она не входит и для сборки не нужна (сборка — `BUILDING.md`).
 
@@ -12,7 +12,7 @@
 - Проверки на хосте: self-test 351/351, UI smoke 52/52 ×4, тесты nt5helper, e2e VLESS+REALITY+Vision
   (`nt5-ui/tests/e2e-reality.sh`), зонд рантайма (`nt5-ui/tests/nt50probe`, в т.ч. проверка
   `tcp-refused` по коду 10061, а не по тексту ошибки).
-- По сообщению пользователя на Windows 2000 SP4 (с .NET Framework 2.0 и установленными
+- По сообщению сопровождающего на Windows 2000 SP4 (с .NET Framework 2.0 и установленными
   сертификатами, **без KernelX**) и на Windows XP SP3 (без расширений системы) работают ссылки VLESS,
   HTTP-подписки, URL Test, подключение, отключение, переподключение и трафик браузера через прокси.
   Точная конфигурация и ограничения — `docs/nt5-win2000.md`.
@@ -20,11 +20,13 @@
   добавлены `BUILDING.md` и `.gitignore` проекта.
 - Опубликовано: репозиторий https://github.com/quargelk/NekoRay-NT5 с корневым `README.md`
   (английский) и `README.ru.md` (русский), снимками экрана в `docs/screenshots/` и пререлизом
-  разработки `v0.9.7-dev1` (заметки к выпуску — `docs/releases/v0.9.7-dev1.md`).
+  разработки `v0.9.7-dev1` (заметки к выпуску — `docs/releases/v0.9.7-dev1.md`). Снимки: шесть с
+  хоста Windows 11 и два с настоящих систем — главное окно на Windows XP SP3 и Diagnostics на
+  Windows 2000 SP4 (`docs/nt5-screenshots.md`).
 
 ## 2026-10-17 (позже): результаты XP по `-portfix-test`; план первого опыта на Windows 2000
 
-### Результаты ручной проверки на XP SP3 (сообщены пользователем)
+### Результаты ручной проверки на XP SP3 (сообщены сопровождающим)
 
 Комплект `NekoRay-NT5-build-lab\versions\NekoRayNT5-v0.9.6-rc2-portfix-test`.
 Таблица по строкам — в `docs/nt5-test-checklist.md`, раздел «Результаты на
@@ -93,7 +95,7 @@ Windows XP SP3».
 
 ### Состояние
 
-- **A. Подтверждено пользователем на XP (rc2):** запуск и Diagnostics;
+- **A. Подтверждено сопровождающим на XP (rc2):** запуск и Diagnostics;
   VLESS + REALITY + Vision; импорт подписки в новую группу; подписка с
   Happ-совместимым HWID; URL Test и фильтры маршрутов. Остальные строки
   чек-листа этим не закрыты.
@@ -194,7 +196,7 @@ Windows XP SP3».
   cacert.pem `a41b5d356aea97a529fe27e0f7316d2f9d946d75927476cf9cf1b90637d00505`.
 - Поиск секретов по `nt5-ui`, документам и комплекту: только синтетические
   данные и GUID проектов.
-- На XP пользователю: чек-лист G1–G4 (обновление с 0.9.5), H2–H9 (Add),
+- На XP (ручная проверка): чек-лист G1–G4 (обновление с 0.9.5), H2–H9 (Add),
   C/D (подключение и системный прокси), правый щелчок по вкладкам групп.
 
 ### 4. Локализация English/Русский (готово 2026-10-17, проверено на Windows 11)
@@ -314,9 +316,9 @@ Windows XP SP3».
 
 1. Пользователь: прогнать на XP-VM чек-лист `docs/nt5-test-checklist.md`
    (C, D, E, G, I, K, L) с комплектом `-rc2`; прислать результаты.
-2. Пользователь: снимки по `docs/nt5-screenshots.md` → обновить README.
-3. Пользователь (при наличии VM): Windows 2000 W1–W9 (`docs/nt5-win2000.md`).
-4. Решение пользователя: делать ли порт рантайма Go на NT 5.0 (большая
+2. Снимки по `docs/nt5-screenshots.md` → обновить README (сделано в 0.9.7-dev1).
+3. Ручная проверка (при наличии VM): Windows 2000 W1–W9 (`docs/nt5-win2000.md`).
+4. Решение сопровождающего: делать ли порт рантайма Go на NT 5.0 (большая
    отдельная задача) или оставить Windows 2000 неподдерживаемой.
 5. Перед публичным выпуском: опубликовать исходники `xray.exe`; решить,
    какой README будет корневым; сборка в VS2010 SP1 (F5, Release).
@@ -489,7 +491,7 @@ TestAddSource, TestDownloadRoutes, TestPorts + HWID/маршруты через 
 
 ### Следующие шаги
 
-1. XP-VM: чек-лист, раздел H (Add/HWID/маршруты) и A–F; HTTPS-подписка Quattro.
+1. XP-VM: чек-лист, раздел H (Add/HWID/маршруты) и A–F; HTTPS-подписка настоящего провайдера.
 2. TUN с драйвером TAP 9.9.2_3 на XP-VM (G0–G10) — без этого TUN не заявляется.
 3. VS2010 SP1: открыть, F5, Release (A2a, A2b).
 4. Перед публикацией: тексты лицензий зависимостей Xray (go.mod 1.8.3) в `licenses/`.
@@ -497,8 +499,8 @@ TestAddSource, TestDownloadRoutes, TestPorts + HWID/маршруты через 
 
 ## Состояние на 2026-10-15: версия 0.9.1 (доводка после первой проверки 0.9.0 на XP)
 
-Результат пользователя на XP с 0.9.0: VLESS + Reality + Vision через System Proxy
-работает; подписка Quattro — `fetch: the server certificate is not trusted
+Результат ручной проверки на XP с 0.9.0: VLESS + Reality + Vision через System Proxy
+работает; подписка настоящего провайдера — `fetch: the server certificate is not trusted
 (unknown certificate authority)`; флажок TUN Mode серый; в VS2010 в Output —
 `System.Security.SecurityException` в `mscorlib.dll`, выход с кодом 0.
 
@@ -521,7 +523,7 @@ TestAddSource, TestDownloadRoutes, TestPorts + HWID/маршруты через 
 (6 прогонов подряд); Go 14/14; ручной `nt5helper fetch -ca cacert.pem` к трём
 публичным HTTPS-серверам — цепочки проверены без хранилища Windows.
 
-На XP не проверено: HTTPS-подписка Quattro с 0.9.1, TUN с драйвером (G0–G10),
+На XP не проверено: HTTPS-подписка настоящего провайдера с 0.9.1, TUN с драйвером (G0–G10),
 VS2010 (A2a, A2b). Пакет: `NekoRay-NT5-build-lab\versions\NekoRayNT5-v0.9.1`.
 
 ## Состояние на 2026-10-14: версия 0.9.0

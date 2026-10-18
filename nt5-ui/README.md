@@ -56,8 +56,8 @@ Disconnect.**
 
 | System | Status |
 |---|---|
-| Windows XP SP3, 32-bit | Main target, no system extensions needed. With 0.9.7-dev1 the user reports working: VLESS share links, HTTP subscriptions, URL Test, connect, disconnect, reconnect, browser traffic through the proxy. |
-| Windows 2000 SP4, 32-bit | Second target, the same files as on XP: `xray.exe` and `nt5helper.exe` are built for NT 5.0 (`third_party/README.md`). With 0.9.7-dev1 the user reports the same results as on XP on Windows 2000 SP4 with .NET Framework 2.0 and current root certificates installed, **without** KernelX. Other Windows 2000 configurations: not tested. Details and limitations: `../docs/nt5-win2000.md`. |
+| Windows XP SP3, 32-bit | Main target, no system extensions needed. With 0.9.7-dev1 the maintainer reports working: VLESS share links, HTTP subscriptions, URL Test, connect, disconnect, reconnect, browser traffic through the proxy. |
+| Windows 2000 SP4, 32-bit | Second target, the same files as on XP: `xray.exe` and `nt5helper.exe` are built for NT 5.0 (`third_party/README.md`). With 0.9.7-dev1 the maintainer reports the same results as on XP on Windows 2000 SP4 with .NET Framework 2.0 and current root certificates installed, **without** KernelX. Other Windows 2000 configurations: not tested. Details and limitations: `../docs/nt5-win2000.md`. |
 | Windows Vista and later | Not a target; the program runs, but use the official Nekoray/NekoBox there. |
 
 Requirements: **.NET Framework 2.0** and a processor with **SSE2** (Pentium 4, Athlon 64 or newer):
@@ -120,12 +120,12 @@ need no real subscription. The real system proxy is tested by hand on a test sys
 |---|---|---|
 | Debug and Release builds (MSBuild 4.0, .NET 2.0 reference assemblies) | Windows 11 (host) | no errors, no warnings |
 | Automatic tests: self-tests, UI smoke in English and Russian, Go tests | Windows 11 (host) | all pass - this is **not** a test on XP |
-| VLESS + REALITY + Vision through the system proxy | Windows XP SP3 (version 0.9.0, by the user) | works |
-| Servers and subscriptions | Windows XP (version 0.9.5, by the user) | works |
-| Version 0.9.6-rc2 (portfix test package): port fix, switching, restart, languages | Windows XP SP3 (by the user) | works (`../docs/nt5-test-checklist.md`) |
+| VLESS + REALITY + Vision through the system proxy | Windows XP SP3 (version 0.9.0, by the maintainer) | works |
+| Servers and subscriptions | Windows XP (version 0.9.5, by the maintainer) | works |
+| Version 0.9.6-rc2 (portfix test package): port fix, switching, restart, languages | Windows XP SP3 (by the maintainer) | works (`../docs/nt5-test-checklist.md`) |
 | 0.9.7-dev1: builds, self-test 351/351, UI smoke 52/52 (Debug/Release, en/ru), nt5helper Go tests, NT 5.0 probe, VLESS+REALITY+Vision e2e | Windows 11 (host; NT 5.0 paths simulated) | all pass - **not** a test on the target systems |
-| 0.9.7-dev1: VLESS links, HTTP subscriptions, URL Test, connect, disconnect, reconnect, browser traffic | Windows XP SP3 (by the user) | works |
-| 0.9.7-dev1: the same | Windows 2000 SP4, .NET 2.0, root certificates, without KernelX (by the user) | works |
+| 0.9.7-dev1: VLESS links, HTTP subscriptions, URL Test, connect, disconnect, reconnect, browser traffic | Windows XP SP3 (by the maintainer) | works |
+| 0.9.7-dev1: the same | Windows 2000 SP4, .NET 2.0, root certificates, without KernelX (by the maintainer) | works |
 | Visual Studio 2010 SP1 | - | **not verified** (the project is in VS2010 format) |
 
 ## Known limitations
