@@ -1,0 +1,10 @@
+diff --git a/go.mod b/go.mod
+index 2783ff2..2cada00 100644
+--- a/go.mod
++++ b/go.mod
+@@ -58,3 +58,5 @@ require (
+ 	gopkg.in/yaml.v2 v2.4.0 // indirect
+ 	gopkg.in/yaml.v3 v3.0.1 // indirect
+ )
++
++replace github.com/sagernet/wireguard-go => ../wireguard-go-nt5

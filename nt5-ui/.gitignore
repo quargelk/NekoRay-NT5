@@ -1,0 +1,18 @@
+bin/
+obj/
+*.suo
+*.user
+*.cache
+
+# the root .gitignore ignores solution files
+!*.sln
+
+# binaries dropped next to the program at build time (see runtime/README.txt)
+runtime/*
+!runtime/README.txt
+
+# the Mozilla CA bundle is text and part of the package (see runtime/README.txt)
+!runtime/cacert.pem
+
+# the Go toolchain with the Windows XP backports (see third_party/README.md)
+toolchain/

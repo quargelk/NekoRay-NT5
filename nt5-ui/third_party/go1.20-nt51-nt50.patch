@@ -1,0 +1,690 @@
+diff -ruN a/src/cmd/link/internal/ld/pe.go b/src/cmd/link/internal/ld/pe.go
+--- a/src/cmd/link/internal/ld/pe.go	2026-10-18 03:14:06.586248000 +0300
++++ b/src/cmd/link/internal/ld/pe.go	2026-10-18 03:14:06.600954500 +0300
+@@ -147,7 +147,7 @@
+ 
+ const (
+ 	PeMinimumTargetMajorVersion = 5
+-	PeMinimumTargetMinorVersion = 1
++	PeMinimumTargetMinorVersion = 0 //BACKPORT(NT_50): was 1 (Windows XP); 5.0 = Windows 2000
+ )
+ 
+ // DOS stub that prints out
+diff -ruN a/src/crypto/rand/rand_windows.go b/src/crypto/rand/rand_windows.go
+--- a/src/crypto/rand/rand_windows.go	2026-10-18 03:14:06.656393200 +0300
++++ b/src/crypto/rand/rand_windows.go	2026-10-18 03:14:06.671437400 +0300
+@@ -19,7 +19,11 @@
+ 	// RtlGenRandom only returns 1<<32-1 bytes at a time. We only read at
+ 	// most 1<<31-1 bytes at a time so that  this works the same on 32-bit
+ 	// and 64-bit systems.
+-	if err := batched(windows.RtlGenRandom, 1<<31-1)(b); err != nil {
++	gen := windows.RtlGenRandom
++	if windows.LoadRtlGenRandom() != nil {
++		gen = windows.CryptGenRandom //BACKPORT(NT_50): Windows 2000 has no RtlGenRandom
++	}
++	if err := batched(gen, 1<<31-1)(b); err != nil {
+ 		return 0, err
+ 	}
+ 	return len(b), nil
+diff -ruN a/src/internal/syscall/windows/nt50_windows.go b/src/internal/syscall/windows/nt50_windows.go
+--- a/src/internal/syscall/windows/nt50_windows.go	1970-01-01 03:00:00.000000000 +0300
++++ b/src/internal/syscall/windows/nt50_windows.go	2026-10-18 03:14:07.050862400 +0300
+@@ -0,0 +1,121 @@
++// NekoRay NT5 addition for Windows 2000 (NT 5.0); not part of upstream Go (see nt5-ui/third_party/README.md).
++// Use of this source code is governed by a BSD-style
++// license that can be found in the LICENSE file.
++
++//BACKPORT(NT_50): helpers for Windows 2000 (NT 5.0), which lacks some functions of Windows XP.
++
++package windows
++
++import (
++	"sync"
++	"syscall"
++	"unsafe"
++)
++
++// nt50Simulate is set to "1" only by test builds (-ldflags "-X internal/syscall/windows.nt50Simulate=1"):
++// the Windows XP functions below are then treated as missing, as on Windows 2000.
++var nt50Simulate string
++
++var errNT50Simulated = syscall.Errno(127) // ERROR_PROC_NOT_FOUND
++
++// SimulateNT50 reports whether this is such a test build.
++func SimulateNT50() bool {
++	return nt50Simulate == "1"
++}
++
++// LoadRtlGenRandom reports whether advapi32 has RtlGenRandom (SystemFunction036, Windows XP and newer).
++func LoadRtlGenRandom() error {
++	if SimulateNT50() {
++		return errNT50Simulated
++	}
++	return procSystemFunction036.Find()
++}
++
++// LoadConnectEx reports whether Winsock has ConnectEx (Windows XP and newer).
++func LoadConnectEx() error {
++	if SimulateNT50() {
++		return errNT50Simulated
++	}
++	return syscall.LoadConnectEx()
++}
++
++// LoadGetAddrInfo reports whether ws2_32 has GetAddrInfoW (Windows XP SP2 and newer).
++func LoadGetAddrInfo() error {
++	if SimulateNT50() {
++		return errNT50Simulated
++	}
++	return syscall.LoadGetAddrInfo()
++}
++
++var cryptProv struct {
++	once sync.Once
++	h    syscall.Handle
++	err  error
++}
++
++// CryptGenRandom fills buf from CryptGenRandom of the default RSA provider (a verification
++// context, no key container). This is how crypto/rand worked on every Windows version up to
++// Go 1.10; it is used only when RtlGenRandom is missing.
++func CryptGenRandom(buf []byte) error {
++	cryptProv.once.Do(func() {
++		cryptProv.err = syscall.CryptAcquireContext(&cryptProv.h, nil, nil, syscall.PROV_RSA_FULL, syscall.CRYPT_VERIFYCONTEXT)
++	})
++	if cryptProv.err != nil {
++		return cryptProv.err
++	}
++	if len(buf) == 0 {
++		return nil
++	}
++	return syscall.CryptGenRandom(cryptProv.h, uint32(len(buf)), &buf[0])
++}
++
++// LoadGetAdaptersAddresses reports whether iphlpapi has GetAdaptersAddresses (Windows XP and newer).
++func LoadGetAdaptersAddresses() error {
++	if SimulateNT50() {
++		return errNT50Simulated
++	}
++	return procGetAdaptersAddresses.Find()
++}
++
++const (
++	WSAEWOULDBLOCK syscall.Errno = 10035
++	WSAENOTSOCK    syscall.Errno = 10038
++	FIONBIO                      = 0x8004667e
++	SO_ERROR                     = 0x1007
++)
++
++// FdSet is the fd_set of Winsock (FD_SETSIZE 64).
++type FdSet struct {
++	Count uint32
++	Array [64]syscall.Handle
++}
++
++var (
++	procselect      = modws2_32.NewProc("select")
++	procioctlsocket = modws2_32.NewProc("ioctlsocket")
++)
++
++// Select calls Winsock select; nfds is ignored by Winsock.
++func Select(readfds, writefds, exceptfds *FdSet, timeout *syscall.Timeval) (n int, err error) {
++	r0, _, e1 := syscall.Syscall6(procselect.Addr(), 5, 0, uintptr(unsafe.Pointer(readfds)),
++		uintptr(unsafe.Pointer(writefds)), uintptr(unsafe.Pointer(exceptfds)), uintptr(unsafe.Pointer(timeout)), 0)
++	if int32(r0) == -1 {
++		if e1 != 0 {
++			return -1, error(e1)
++		}
++		return -1, syscall.EINVAL
++	}
++	return int(int32(r0)), nil
++}
++
++// Ioctlsocket calls Winsock ioctlsocket.
++func Ioctlsocket(s syscall.Handle, cmd uint32, arg *uint32) error {
++	r0, _, e1 := syscall.Syscall(procioctlsocket.Addr(), 3, uintptr(s), uintptr(cmd), uintptr(unsafe.Pointer(arg)))
++	if int32(r0) != 0 {
++		if e1 != 0 {
++			return error(e1)
++		}
++		return syscall.EINVAL
++	}
++	return nil
++}
+diff -ruN a/src/net/fd_windows.go b/src/net/fd_windows.go
+--- a/src/net/fd_windows.go	2026-10-18 03:14:06.736495000 +0300
++++ b/src/net/fd_windows.go	2026-10-18 03:14:06.750247000 +0300
+@@ -7,6 +7,7 @@
+ import (
+ 	"context"
+ 	"internal/poll"
++	"internal/syscall/windows"
+ 	"os"
+ 	"runtime"
+ 	"syscall"
+@@ -71,6 +72,9 @@
+ 		err := connectFunc(fd.pfd.Sysfd, ra)
+ 		return nil, os.NewSyscallError("connect", err)
+ 	}
++	if windows.LoadConnectEx() != nil {
++		return nil, fd.connectNT50(ctx, ra) //BACKPORT(NT_50): Windows 2000 has no ConnectEx
++	}
+ 	// ConnectEx windows API requires an unconnected, previously bound socket.
+ 	if la == nil {
+ 		switch ra.(type) {
+diff -ruN a/src/net/fd_windows_nt50.go b/src/net/fd_windows_nt50.go
+--- a/src/net/fd_windows_nt50.go	1970-01-01 03:00:00.000000000 +0300
++++ b/src/net/fd_windows_nt50.go	2026-10-18 03:14:06.805958500 +0300
+@@ -0,0 +1,88 @@
++// NekoRay NT5 addition for Windows 2000 (NT 5.0); not part of upstream Go (see nt5-ui/third_party/README.md).
++// Use of this source code is governed by a BSD-style
++// license that can be found in the LICENSE file.
++
++//BACKPORT(NT_50): TCP connect for Windows 2000, which has no ConnectEx (Windows XP and newer).
++
++package net
++
++import (
++	"context"
++	"internal/syscall/windows"
++	"os"
++	"syscall"
++	"time"
++	"unsafe"
++)
++
++// connectPollInterval bounds how long a cancelled dial can still wait in select.
++const connectPollInterval = 50 * time.Millisecond
++
++// connectNT50 starts a non-blocking connect and waits in select (at most connectPollInterval
++// at a time) until it completes, fails, the context is done or its deadline passes. The socket
++// is put back into blocking mode afterwards; its overlapped I/O through the completion port
++// works as with ConnectEx. While it waits, it occupies one thread, as a blocking connect would.
++func (fd *netFD) connectNT50(ctx context.Context, ra syscall.Sockaddr) error {
++	s := fd.pfd.Sysfd
++	on := uint32(1)
++	if err := windows.Ioctlsocket(s, windows.FIONBIO, &on); err != nil {
++		return os.NewSyscallError("ioctlsocket", err)
++	}
++	err := fd.connectWaitNT50(ctx, s, ra)
++	off := uint32(0)
++	if err2 := windows.Ioctlsocket(s, windows.FIONBIO, &off); err == nil && err2 != nil {
++		err = os.NewSyscallError("ioctlsocket", err2)
++	}
++	return err
++}
++
++func (fd *netFD) connectWaitNT50(ctx context.Context, s syscall.Handle, ra syscall.Sockaddr) error {
++	switch err := connectFunc(s, ra); err {
++	case nil:
++		return nil
++	case windows.WSAEWOULDBLOCK:
++	default:
++		return os.NewSyscallError("connect", err)
++	}
++	for {
++		select {
++		case <-ctx.Done():
++			return mapErr(ctx.Err())
++		default:
++		}
++		wait := connectPollInterval
++		if deadline, ok := ctx.Deadline(); ok {
++			left := time.Until(deadline)
++			if left <= 0 {
++				return mapErr(context.DeadlineExceeded)
++			}
++			if left < wait {
++				wait = left
++			}
++		}
++		var w, e windows.FdSet
++		w.Count, w.Array[0] = 1, s
++		e.Count, e.Array[0] = 1, s
++		tv := syscall.NsecToTimeval(int64(wait))
++		n, err := windows.Select(nil, &w, &e, &tv)
++		if err != nil {
++			return os.NewSyscallError("select", err)
++		}
++		if n == 0 {
++			continue
++		}
++		var soerr int32
++		l := int32(unsafe.Sizeof(soerr))
++		if err := syscall.Getsockopt(s, syscall.SOL_SOCKET, windows.SO_ERROR, (*byte)(unsafe.Pointer(&soerr)), &l); err != nil {
++			return os.NewSyscallError("getsockopt", err)
++		}
++		if soerr != 0 {
++			return os.NewSyscallError("connect", syscall.Errno(soerr))
++		}
++		if e.Count != 0 {
++			// failed, but without a reason in SO_ERROR
++			return os.NewSyscallError("connect", syscall.Errno(syscall.WSAECONNABORTED))
++		}
++		return nil
++	}
++}
+diff -ruN a/src/net/interface_windows.go b/src/net/interface_windows.go
+--- a/src/net/interface_windows.go	2026-10-18 03:14:06.984423900 +0300
++++ b/src/net/interface_windows.go	2026-10-18 03:14:06.997239500 +0300
+@@ -33,6 +33,10 @@
+ // multiple IP addresses including unicast, anycast and multicast
+ // addresses.
+ func adapterAddresses() ([]*windows.IpAdapterAddresses, error) {
++	if err := windows.LoadGetAdaptersAddresses(); err != nil {
++		//BACKPORT(NT_50): Windows 2000 has no GetAdaptersAddresses: an error instead of a panic.
++		return nil, os.NewSyscallError("getadaptersaddresses", err)
++	}
+ 	var b []byte
+ 	l := uint32(15000) // recommended initial size
+ 	for {
+diff -ruN a/src/net/lookup_windows.go b/src/net/lookup_windows.go
+--- a/src/net/lookup_windows.go	2026-10-18 03:14:06.860613000 +0300
++++ b/src/net/lookup_windows.go	2026-10-18 03:14:06.874296500 +0300
+@@ -108,6 +108,9 @@
+ 	getaddr := func() ([]IPAddr, error) {
+ 		acquireThread()
+ 		defer releaseThread()
++		if windows.LoadGetAddrInfo() != nil {
++			return lookupIPNT50(family, name) //BACKPORT(NT_50): Windows 2000 has no GetAddrInfoW
++		}
+ 		hints := syscall.AddrinfoW{
+ 			Family:   family,
+ 			Socktype: syscall.SOCK_STREAM,
+@@ -188,6 +191,9 @@
+ 	// TODO(bradfitz): finish ctx plumbing. Nothing currently depends on this.
+ 	acquireThread()
+ 	defer releaseThread()
++	if windows.LoadGetAddrInfo() != nil {
++		return lookupPortNT50(network, service) //BACKPORT(NT_50): Windows 2000 has no GetAddrInfoW
++	}
+ 	var stype int32
+ 	switch network {
+ 	case "tcp4", "tcp6":
+diff -ruN a/src/net/lookup_windows_nt50.go b/src/net/lookup_windows_nt50.go
+--- a/src/net/lookup_windows_nt50.go	1970-01-01 03:00:00.000000000 +0300
++++ b/src/net/lookup_windows_nt50.go	2026-10-18 03:14:06.930844900 +0300
+@@ -0,0 +1,79 @@
++// NekoRay NT5 addition for Windows 2000 (NT 5.0); not part of upstream Go (see nt5-ui/third_party/README.md).
++// Use of this source code is governed by a BSD-style
++// license that can be found in the LICENSE file.
++
++//BACKPORT(NT_50): name and port lookup for Windows 2000, which has no GetAddrInfoW (it is new
++// in Windows XP SP2): gethostbyname and getservbyname of Winsock, as Go 1.0 used them. They
++// know IPv4 only, which is all that Windows 2000 has, and read the hosts file and DNS as
++// GetAddrInfoW does.
++
++package net
++
++import (
++	"runtime"
++	"syscall"
++	"unsafe"
++)
++
++const _WSANO_DATA = syscall.Errno(11004)
++
++func lookupIPNT50(family int32, name string) ([]IPAddr, error) {
++	if family == syscall.AF_INET6 {
++		return nil, &DNSError{Err: errNoSuchHost.Error(), Name: name, IsNotFound: true}
++	}
++	// The result is in thread-local storage of Winsock: stay on this thread until it is copied.
++	runtime.LockOSThread()
++	defer runtime.UnlockOSThread()
++	h, e := syscall.GetHostByName(name)
++	if e != nil {
++		if e == _WSANO_DATA {
++			e = _WSAHOST_NOT_FOUND
++		}
++		err := winError("gethostbyname", e)
++		dnsError := &DNSError{Err: err.Error(), Name: name}
++		if err == errNoSuchHost {
++			dnsError.IsNotFound = true
++		}
++		return nil, dnsError
++	}
++	if h.AddrType != syscall.AF_INET || h.Length != IPv4len {
++		return nil, &DNSError{Err: syscall.EWINDOWS.Error(), Name: name}
++	}
++	addrs := make([]IPAddr, 0, 5)
++	list := (*[1 << 10]*[4]byte)(unsafe.Pointer(h.AddrList))
++	for i := 0; i < len(list) && list[i] != nil; i++ {
++		a := list[i]
++		addrs = append(addrs, IPAddr{IP: IPv4(a[0], a[1], a[2], a[3])})
++	}
++	if len(addrs) == 0 {
++		return nil, &DNSError{Err: errNoSuchHost.Error(), Name: name, IsNotFound: true}
++	}
++	return addrs, nil
++}
++
++func lookupPortNT50(network, service string) (int, error) {
++	proto := "tcp"
++	switch network {
++	case "udp", "udp4", "udp6":
++		proto = "udp"
++	}
++	runtime.LockOSThread()
++	s, e := syscall.GetServByName(service, proto)
++	port := 0
++	if e == nil {
++		port = int(syscall.Ntohs(s.Port))
++	}
++	runtime.UnlockOSThread()
++	if e == nil {
++		return port, nil
++	}
++	if port, err := lookupPortMap(network, service); err == nil {
++		return port, nil
++	}
++	err := winError("getservbyname", e)
++	dnsError := &DNSError{Err: err.Error(), Name: network + "/" + service}
++	if err == errNoSuchHost {
++		dnsError.IsNotFound = true
++	}
++	return 0, dnsError
++}
+diff -ruN a/src/runtime/os_windows.go b/src/runtime/os_windows.go
+--- a/src/runtime/os_windows.go	2026-10-18 03:14:06.185920700 +0300
++++ b/src/runtime/os_windows.go	2026-10-18 03:14:06.200260600 +0300
+@@ -16,7 +16,7 @@
+ 	_NSIG = 65
+ )
+ 
+-//go:cgo_import_dynamic runtime._AddVectoredExceptionHandler AddVectoredExceptionHandler%2 "kernel32.dll"
++////BACKPORT(NT_50): disabled and moved to dynamic import runtime._AddVectoredExceptionHandler AddVectoredExceptionHandler%2 "kernel32.dll"
+ //go:cgo_import_dynamic runtime._CloseHandle CloseHandle%1 "kernel32.dll"
+ //go:cgo_import_dynamic runtime._CreateEventA CreateEventA%4 "kernel32.dll"
+ //go:cgo_import_dynamic runtime._CreateFileA CreateFileA%7 "kernel32.dll"
+@@ -68,7 +68,7 @@
+ 	// Following syscalls are available on every Windows PC.
+ 	// All these variables are set by the Windows executable
+ 	// loader before the Go program starts.
+-	_AddVectoredExceptionHandler,
++	//BACKPORT(NT_50): disabled and moved to dynamic loading _AddVectoredExceptionHandler,
+ 	_CloseHandle,
+ 	_CreateEventA,
+ 	_CreateFileA,
+@@ -125,6 +125,7 @@
+ 	_LoadLibraryExW,
+ 	_GetQueuedCompletionStatusEx, //BACKPORT(NT_51): added as dynamic
+ 	_CreateWaitableTimerExW, //BACKPORT(NT_51): added as dynamic
++	_AddVectoredExceptionHandler, //BACKPORT(NT_50): added as dynamic, Windows 2000 does not have it
+ 	_ stdFunction
+ 
+ 	// Use RtlGenRandom to generate cryptographically random data.
+@@ -137,6 +138,16 @@
+ 	// manually during runtime startup.
+ 	_RtlGenRandom stdFunction
+ 
++	//BACKPORT(NT_50): Windows 2000 has no RtlGenRandom (SystemFunction036); the runtime then
++	// takes its random data from CryptGenRandom of the default CSP (as crypto/rand of Go 1.10
++	// and older did on every Windows version).
++	_CryptAcquireContextA stdFunction
++	_CryptGenRandom       stdFunction
++	cryptProv             uintptr
++
++	// nt50Simulate is set to "1" only by test builds (-ldflags -X): see signal_windows_nt50_386.go.
++	nt50Simulate string
++
+ 	// Load ntdll.dll manually during startup, otherwise Mingw
+ 	// links wrong printf function to cgo executable (see issue
+ 	// 12030 for details).
+@@ -261,6 +272,10 @@
+ 	_LoadLibraryExW = windowsFindfunc(k32, []byte("LoadLibraryExW\000"))
+ 	_GetQueuedCompletionStatusEx = windowsFindfunc(k32, []byte("GetQueuedCompletionStatusEx\000")) //BACKPORT(NT_51): added to dynamic
+ 	_CreateWaitableTimerExW = windowsFindfunc(k32, []byte("CreateWaitableTimerExW\000")) //BACKPORT(NT_51): added to dynamic
++	_AddVectoredExceptionHandler = windowsFindfunc(k32, []byte("AddVectoredExceptionHandler\000")) //BACKPORT(NT_50): added to dynamic
++	if nt50Simulate == "1" {
++		_AddVectoredExceptionHandler = nil
++	}
+ 	useLoadLibraryEx = (_LoadLibraryExW != nil && _LoadLibraryExA != nil && _AddDllDirectory != nil)
+ 
+ 	var advapi32dll = []byte("advapi32.dll\000")
+@@ -269,6 +284,24 @@
+ 		throw("advapi32.dll not found")
+ 	}
+ 	_RtlGenRandom = windowsFindfunc(a32, []byte("SystemFunction036\000"))
++	if nt50Simulate == "1" {
++		_RtlGenRandom = nil
++	}
++	if _RtlGenRandom == nil {
++		//BACKPORT(NT_50): fallback for Windows 2000
++		const (
++			_PROV_RSA_FULL       = 1
++			_CRYPT_VERIFYCONTEXT = 0xF0000000
++		)
++		_CryptAcquireContextA = windowsFindfunc(a32, []byte("CryptAcquireContextA\000"))
++		_CryptGenRandom = windowsFindfunc(a32, []byte("CryptGenRandom\000"))
++		if _CryptAcquireContextA != nil && _CryptGenRandom != nil {
++			var prov uintptr
++			if stdcall5(_CryptAcquireContextA, uintptr(unsafe.Pointer(&prov)), 0, 0, _PROV_RSA_FULL, _CRYPT_VERIFYCONTEXT) != 0 {
++				cryptProv = prov
++			}
++		}
++	}
+ 
+ 	var ntdll = []byte("ntdll.dll\000")
+ 	n32 := windowsLoadSystemLib(ntdll)
+@@ -278,6 +311,9 @@
+ 	_NtWaitForSingleObject = windowsFindfunc(n32, []byte("NtWaitForSingleObject\000"))
+ 	_RtlGetCurrentPeb = windowsFindfunc(n32, []byte("RtlGetCurrentPeb\000"))
+ 	_RtlGetNtVersionNumbers = windowsFindfunc(n32, []byte("RtlGetNtVersionNumbers\000"))
++	if nt50Simulate == "1" {
++		_RtlGetNtVersionNumbers = nil
++	}
+ 
+ 	if !haveCputicksAsm {
+ 		_QueryPerformanceCounter = windowsFindfunc(k32, []byte("QueryPerformanceCounter\000"))
+@@ -512,6 +548,9 @@
+ 	)
+ 
+ 	// Check that we're ≥ 10.0.15063.
++	if _RtlGetNtVersionNumbers == nil || _RtlGetCurrentPeb == nil {
++		return //BACKPORT(NT_50): not exported by every old ntdll; such systems have no long path support anyway
++	}
+ 	var maj, min, build uint32
+ 	stdcall3(_RtlGetNtVersionNumbers, uintptr(unsafe.Pointer(&maj)), uintptr(unsafe.Pointer(&min)), uintptr(unsafe.Pointer(&build)))
+ 	if maj < 10 || (maj == 10 && min == 0 && build&0xffff < 15063) {
+@@ -655,8 +694,14 @@
+ //go:nosplit
+ func getRandomData(r []byte) {
+ 	n := 0
+-	if stdcall2(_RtlGenRandom, uintptr(unsafe.Pointer(&r[0])), uintptr(len(r)))&0xff != 0 {
+-		n = len(r)
++	if _RtlGenRandom != nil {
++		if stdcall2(_RtlGenRandom, uintptr(unsafe.Pointer(&r[0])), uintptr(len(r)))&0xff != 0 {
++			n = len(r)
++		}
++	} else if cryptProv != 0 { //BACKPORT(NT_50): CryptGenRandom on Windows 2000
++		if stdcall3(_CryptGenRandom, cryptProv, uintptr(len(r)), uintptr(unsafe.Pointer(&r[0]))) != 0 {
++			n = len(r)
++		}
+ 	}
+ 	extendRandom(r, n)
+ }
+diff -ruN a/src/runtime/rt0_windows_386.s b/src/runtime/rt0_windows_386.s
+--- a/src/runtime/rt0_windows_386.s	2026-10-18 03:14:06.402285700 +0300
++++ b/src/runtime/rt0_windows_386.s	2026-10-18 03:14:06.417345800 +0300
+@@ -5,6 +5,14 @@
+ #include "textflag.h"
+ 
+ TEXT _rt0_386_windows(SB),NOSPLIT,$0
++	//BACKPORT(NT_50): register sehtramp for the main thread (see tstart_stdcall). The main
++	// thread never returns from here (the process ends with ExitProcess). _rt0_386 then passes
++	// the record as argc/argv, which Windows programs do not use (see goargs).
++	MOVL	$runtime·sehtramp(SB), AX
++	PUSHL	AX
++	MOVL	0(FS), AX
++	PUSHL	AX
++	MOVL	SP, 0(FS)
+ 	JMP	_rt0_386(SB)
+ 
+ // When building with -buildmode=(c-shared or c-archive), this
+diff -ruN a/src/runtime/signal_windows.go b/src/runtime/signal_windows.go
+--- a/src/runtime/signal_windows.go	2026-10-18 03:14:06.260136000 +0300
++++ b/src/runtime/signal_windows.go	2026-10-18 03:14:06.274411200 +0300
+@@ -28,6 +28,11 @@
+ func lastcontinuetramp()
+ 
+ func initExceptionHandler() {
++	if _AddVectoredExceptionHandler == nil {
++		//BACKPORT(NT_50): Windows 2000 has no vectored exception handling.
++		initExceptionHandlerNT50()
++		return
++	}
+ 	stdcall2(_AddVectoredExceptionHandler, 1, abi.FuncPCABI0(exceptiontramp))
+ 	if _AddVectoredContinueHandler == nil || GOARCH == "386" {
+ 		// use SetUnhandledExceptionFilter for windows-386 or
+diff -ruN a/src/runtime/signal_windows_nt50_386.go b/src/runtime/signal_windows_nt50_386.go
+--- a/src/runtime/signal_windows_nt50_386.go	1970-01-01 03:00:00.000000000 +0300
++++ b/src/runtime/signal_windows_nt50_386.go	2026-10-18 03:14:06.472826000 +0300
+@@ -0,0 +1,61 @@
++// NekoRay NT5 addition for Windows 2000 (NT 5.0); not part of upstream Go (see nt5-ui/third_party/README.md).
++// Use of this source code is governed by a BSD-style
++// license that can be found in the LICENSE file.
++
++//BACKPORT(NT_50): exception handling for Windows 2000, which has no vectored exception
++// handlers (AddVectoredExceptionHandler is new in Windows XP).
++//
++// Every thread that the runtime starts (and the main thread) registers sehtramp as a
++// structured exception handler at the base of its OS stack (sys_windows_386.s,
++// rt0_windows_386.s). Windows calls it for an exception that no inner SEH frame handled,
++// on the stack where the exception happened, as it calls a vectored handler; sehtramp
++// passes it to exceptionhandler through sigtramp, which switches to g0. So a fault in Go code
++// becomes a Go panic as before. Exceptions on threads without that frame (threads that enter
++// Go through a callback) and exceptions that are not Go's reach the top-level filter
++// unhandledtramp: exceptionhandler again, then lastcontinuehandler, which prints the crash
++// report and exits, as the top-level filter does on windows/386 with VEH.
++//
++// With VEH (Windows XP and newer) useSEH stays 0, sehtramp passes every exception on at once,
++// and nothing changes.
++
++package runtime
++
++import (
++	"internal/abi"
++	"runtime/internal/atomic"
++)
++
++// in sys_windows_386.s
++func sehtramp()
++func unhandledtramp()
++
++// useSEH is read by sehtramp: 1 when exceptions are handled through SEH frames.
++var useSEH uint32
++
++// Number of exceptions that reached sehhandler and unhandledhandler; for tests
++// (nt50probe reads them with go:linkname).
++var nt50SEHCalls, nt50UEFCalls uint32
++
++// Called by sigtramp from sehtramp.
++//
++//go:nosplit
++func sehhandler(info *exceptionrecord, r *context, gp *g) int32 {
++	atomic.Xadd(&nt50SEHCalls, 1)
++	return exceptionhandler(info, r, gp)
++}
++
++func initExceptionHandlerNT50() {
++	useSEH = 1
++	stdcall1(_SetUnhandledExceptionFilter, abi.FuncPCABI0(unhandledtramp))
++}
++
++// Called by sigtramp from the top-level exception filter when there is no VEH.
++//
++//go:nosplit
++func unhandledhandler(info *exceptionrecord, r *context, gp *g) int32 {
++	atomic.Xadd(&nt50UEFCalls, 1)
++	if exceptionhandler(info, r, gp) == _EXCEPTION_CONTINUE_EXECUTION {
++		return _EXCEPTION_CONTINUE_EXECUTION
++	}
++	return lastcontinuehandler(info, r, gp)
++}
+diff -ruN a/src/runtime/signal_windows_nt50_other.go b/src/runtime/signal_windows_nt50_other.go
+--- a/src/runtime/signal_windows_nt50_other.go	1970-01-01 03:00:00.000000000 +0300
++++ b/src/runtime/signal_windows_nt50_other.go	2026-10-18 03:14:06.528680400 +0300
+@@ -0,0 +1,13 @@
++// NekoRay NT5 addition for Windows 2000 (NT 5.0); not part of upstream Go (see nt5-ui/third_party/README.md).
++// Use of this source code is governed by a BSD-style
++// license that can be found in the LICENSE file.
++
++//go:build windows && !386
++
++package runtime
++
++//BACKPORT(NT_50): AddVectoredExceptionHandler is resolved at run time; only windows/386 has a
++// fallback (signal_windows_nt50_386.go). Every amd64, arm and arm64 Windows has VEH.
++func initExceptionHandlerNT50() {
++	throw("AddVectoredExceptionHandler not found")
++}
+diff -ruN a/src/runtime/sys_windows_386.s b/src/runtime/sys_windows_386.s
+--- a/src/runtime/sys_windows_386.s	2026-10-18 03:14:06.330447000 +0300
++++ b/src/runtime/sys_windows_386.s	2026-10-18 03:14:06.343837400 +0300
+@@ -159,6 +159,42 @@
+ 	MOVL	$runtime·lastcontinuehandler(SB), AX
+ 	JMP	sigtramp<>(SB)
+ 
++//BACKPORT(NT_50): top-level exception filter when there is no VEH (signal_windows_nt50_386.go).
++TEXT runtime·unhandledtramp(SB),NOSPLIT,$0-0
++	MOVL	$runtime·unhandledhandler(SB), AX
++	JMP	sigtramp<>(SB)
++
++//BACKPORT(NT_50): structured exception handler of the runtime's threads (signal_windows_nt50_386.go).
++// EXCEPTION_DISPOSITION handler(EXCEPTION_RECORD *rec, void *frame, CONTEXT *ctx, void *dctx), cdecl.
++// Returns ExceptionContinueExecution (0) when exceptionhandler resumed the thread (sigpanic),
++// otherwise ExceptionContinueSearch (1). Unwind calls (RtlUnwind) are always passed on.
++TEXT runtime·sehtramp(SB),NOSPLIT,$0-0
++	CMPL	runtime·useSEH(SB), $0
++	JEQ	search
++	MOVL	SP, DX			// the C arguments, which Go code does not see
++	MOVL	4(DX), AX		// EXCEPTION_RECORD*
++	MOVL	4(AX), CX		// ExceptionFlags
++	ANDL	$6, CX			// EXCEPTION_UNWINDING | EXCEPTION_EXIT_UNWIND
++	JNE	search
++	MOVL	12(DX), CX		// CONTEXT*
++	SUBL	$8, SP			// EXCEPTION_POINTERS{rec, ctx}
++	MOVL	AX, 0(SP)
++	MOVL	CX, 4(SP)
++	MOVL	SP, CX
++	// PUSHL CX: the argument of sigtramp, which pops it (RET 4). Encoded as a byte so that
++	// the assembler does not count it in the frame; sigtramp's RET 4 is hidden the same way.
++	BYTE	$0x51
++	MOVL	$runtime·sehhandler(SB), AX
++	CALL	sigtramp<>(SB)
++	ADDL	$8, SP
++	CMPL	AX, $0			// EXCEPTION_CONTINUE_SEARCH
++	JEQ	search
++	MOVL	$0, AX			// ExceptionContinueExecution
++	RET
++search:
++	MOVL	$1, AX			// ExceptionContinueSearch
++	RET
++
+ GLOBL runtime·cbctxts(SB), NOPTR, $4
+ 
+ TEXT runtime·callbackasm1(SB),NOSPLIT,$0
+@@ -253,10 +289,23 @@
+ TEXT runtime·tstart_stdcall(SB),NOSPLIT,$0
+ 	MOVL	newm+0(FP), BX
+ 
++	//BACKPORT(NT_50): register sehtramp for this thread: an EXCEPTION_REGISTRATION_RECORD
++	// {next, handler} on the OS stack, above the g0 stack, linked at FS:0.
++	MOVL	$runtime·sehtramp(SB), AX
++	PUSHL	AX
++	MOVL	0(FS), AX
++	PUSHL	AX
++	MOVL	SP, 0(FS)
++
+ 	PUSHL	BX
+ 	CALL	tstart<>(SB)
+ 	POPL	BX
+ 
++	//BACKPORT(NT_50): unregister it before the thread returns to Windows.
++	POPL	AX
++	MOVL	AX, 0(FS)
++	POPL	AX
++
+ 	// Adjust stack for stdcall to return properly.
+ 	MOVL	(SP), AX		// save return address
+ 	ADDL	$4, SP			// remove single parameter

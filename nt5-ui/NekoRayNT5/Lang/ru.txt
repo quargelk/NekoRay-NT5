@@ -1,0 +1,1827 @@
+# NekoRay NT5 - Russian interface texts (UTF-8). Format: see App/Lang.cs.
+# Every "en:" line is the exact English text of the program; the "ru:" line under it is the translation.
+# Keep {0}, {1}... and \n as they are. Checked by tests/run-tests.cmd (TestTranslation).
+
+en: An unexpected error occurred. The program continues to run.
+ru: Произошла непредвиденная ошибка. Программа продолжает работу.
+
+en: Details were written to:\n{0}
+ru: Подробности записаны в файл:\n{0}
+
+en: NekoRay NT5 stopped because of an unexpected error.
+ru: NekoRay NT5 остановлена из-за непредвиденной ошибки.
+
+en: The system proxy settings were restored and the core was stopped.
+ru: Настройки системного прокси восстановлены, ядро остановлено.
+
+en: The profile is not valid: {0}
+ru: Профиль недействителен: {0}
+
+en: Unexpected error while starting: {0}: {1}
+ru: Непредвиденная ошибка при запуске: {0}: {1}
+
+en: Local {0} port {1} cannot be used: {2}.\nChoose another port in Settings - Connections, or close the program that uses it.
+ru: Локальный порт {0} {1} нельзя использовать: {2}.\nВыберите другой порт в «Настройки — Подключения» или закройте программу, которая его занимает.
+
+en: The core process did not exit within {0} seconds.
+ru: Процесс ядра не завершился за {0} с.
+
+en: The core exited unexpectedly (exit code {0}). See the log for details.
+ru: Ядро неожиданно завершилось (код выхода {0}). Подробности — в журнале.
+
+en: Core not found: {0}\nPut xray.exe next to the program.
+ru: Ядро не найдено: {0}\nПоложите xray.exe рядом с программой.
+
+en: The core cannot run on this system: {0}
+ru: Ядро не может работать в этой системе: {0}
+
+en: Cannot start the core: {0}
+ru: Не удалось запустить ядро: {0}
+
+en: Xray rejected the configuration (the check did not finish in time):
+ru: Xray отклонил конфигурацию (проверка не завершилась вовремя):
+
+en: Xray rejected the configuration:
+ru: Xray отклонил конфигурацию:
+
+en: The core exited during start-up:
+ru: Ядро завершилось во время запуска:
+
+en: The core did not open its local ports within {0} seconds.
+ru: Ядро не открыло локальные порты за {0} с.
+
+en: Cannot write the temporary configuration: {0}
+ru: Не удалось записать временную конфигурацию: {0}
+
+en: the program file was not found.
+ru: файл программы не найден.
+
+en: access is denied (antivirus or file permissions).
+ru: доступ запрещён (антивирус или права на файл).
+
+en: Windows says it is not a valid program for this system (error 193). The file may be damaged or built for a newer Windows.
+ru: Windows сообщает, что это недопустимая программа для этой системы (ошибка 193). Файл может быть повреждён или собран для более новой Windows.
+
+en: the program is built for another processor or Windows version (error 216).
+ru: программа собрана для другого процессора или другой версии Windows (ошибка 216).
+
+en: {0} (error {1}).
+ru: {0} (ошибка {1}).
+
+en: it is already used by another program
+ru: он уже занят другой программой
+
+en: Windows does not allow listening on it for UDP (WSAEACCES: the port lies in a range reserved by Windows - see "netsh int ipv4 show excludedportrange protocol={0}" - or a security program blocks it)
+ru: Windows не разрешает слушать его по UDP (WSAEACCES: порт входит в диапазон, зарезервированный Windows, — см. «netsh int ipv4 show excludedportrange protocol={0}», — или его блокирует программа защиты)
+
+en: Windows does not allow listening on it (WSAEACCES: the port lies in a range reserved by Windows - see "netsh int ipv4 show excludedportrange protocol={0}" - or a security program blocks it)
+ru: Windows не разрешает слушать его (WSAEACCES: порт входит в диапазон, зарезервированный Windows, — см. «netsh int ipv4 show excludedportrange protocol={0}», — или его блокирует программа защиты)
+
+en: the listen address is not available on this computer
+ru: адрес для прослушивания недоступен на этом компьютере
+
+en: Windows refused it ({0})
+ru: Windows отказала ({0})
+
+en: Windows refused one of the local ports (WSAEACCES): it lies in a port range reserved by Windows (Hyper-V, WinNAT, Docker...) or a security program blocks it. Choose other ports in Settings - Connections (for example 10808 and 10809).
+ru: Windows отказала в одном из локальных портов (WSAEACCES): он входит в диапазон, зарезервированный Windows (Hyper-V, WinNAT, Docker...), или его блокирует программа защиты. Выберите другие порты в «Настройки — Подключения» (например, 10808 и 10809).
+
+en: One of the local ports is already used by another program. Close that program or choose other ports in Settings - Connections.
+ru: Один из локальных портов уже занят другой программой. Закройте её или выберите другие порты в «Настройки — Подключения».
+
+en: No free local port was found for TCP and UDP between {0} and {1} (Windows refused 60 random ports).
+ru: Не найден свободный локальный порт для TCP и UDP в диапазоне от {0} до {1} (Windows отказала в 60 случайных портах).
+
+en: (no output)
+ru: (нет вывода)
+
+en: {0} was not found.
+ru: {0} не найден.
+
+en: {0} cannot be read: {1}
+ru: {0} не удаётся прочитать: {1}
+
+en: {0} is not a Windows program.
+ru: {0} не является программой Windows.
+
+en: {0} is a 64-bit program; this Windows is 32-bit. Use the x86 (386) build.
+ru: {0} — 64-разрядная программа, а эта Windows 32-разрядная. Используйте сборку x86 (386).
+
+en: {0} is built for another processor (machine type 0x{1}).
+ru: {0} собран для другого процессора (тип машины 0x{1}).
+
+en: {0} requires Windows NT {1}.{2} or newer ({3}); this system is NT {4}.{5}. Windows refuses to load it.
+ru: {0} требует Windows NT {1}.{2} или новее ({3}); эта система — NT {4}.{5}. Windows отказывается его загружать.
+
+en: {0} is damaged (section table).
+ru: {0} повреждён (таблица секций).
+
+en: {0} is damaged (import table).
+ru: {0} повреждён (таблица импорта).
+
+en: {0} needs system functions that this Windows (NT {1}.{2}) does not have: {3}. Windows refuses to start it.
+ru: {0} использует системные функции, которых нет в этой Windows (NT {1}.{2}): {3}. Windows отказывается его запускать.
+
+en: Windows 8 or newer
+ru: Windows 8 или новее
+
+en: a newer Windows
+ru: более новой Windows
+
+en: its helper process was stopped
+ru: его вспомогательный процесс остановлен
+
+en: its routes via 10.255.0.1 may still exist until Windows restarts ("route print" shows them)
+ru: его маршруты через 10.255.0.1 могут сохраняться до перезагрузки Windows (их показывает «route print»)
+
+en: Left over from the TUN mode of an older version (TUN mode was removed): {0}.
+ru: Осталось от режима TUN старой версии (режим TUN удалён): {0}.
+
+en: Cannot read the system proxy settings (error {0}).
+ru: Не удалось прочитать настройки системного прокси (ошибка {0}).
+
+en: Cannot change the system proxy settings (error {0}).
+ru: Не удалось изменить настройки системного прокси (ошибка {0}).
+
+en: Source: Happ subscription link
+ru: Источник: ссылка подписки Happ
+
+en: Source: web address
+ru: Источник: веб-адрес
+
+en: Downloaded {0}, with the HWID.
+ru: Загружено {0}, с HWID.
+
+en: Downloaded {0}.
+ru: Загружено {0}.
+
+en: Source: share links
+ru: Источник: ссылки на серверы
+
+en: Nothing can be added: {0}
+ru: Добавить нечего: {0}
+
+en: Name: {0}
+ru: Название: {0}
+
+en: Provider: {0}
+ru: Провайдер: {0}
+
+en: Servers found: {0}
+ru: Найдено серверов: {0}
+
+en: Duplicates in the source (ignored): {0}
+ru: Дубликаты в источнике (пропущены): {0}
+
+en: Already in your list: {0}
+ru: Уже есть в вашем списке: {0}
+
+en: Entries that cannot be used: {0}
+ru: Непригодные записи: {0}
+
+en: Lines that are not share links (ignored): {0}
+ru: Строки, не являющиеся ссылками (пропущены): {0}
+
+en: Paste a share link (vless://, vmess://, trojan://, ss://, socks://), a subscription address (https://...) or a happ://add/ link, or open a file.
+ru: Вставьте ссылку на сервер (vless://, vmess://, trojan://, ss://, socks://), адрес подписки (https://...) или ссылку happ://add/ либо откройте файл.
+
+en: This text contains no share links and no subscription address. Paste links that start with vless://, vmess://, trojan://, ss:// or socks://, a subscription address (https://...) or a happ://add/ link, or open a file.
+ru: В этом тексте нет ни ссылок на серверы, ни адреса подписки. Вставьте ссылки, начинающиеся с vless://, vmess://, trojan://, ss:// или socks://, адрес подписки (https://...) или ссылку happ://add/ либо откройте файл.
+
+en: This is an encrypted Happ link (happ://crypt...). Only the Happ application can decrypt it; NekoRay NT5 has no compatible decoder. Ask the provider for the plain subscription address (https://...) and add that.
+ru: Это зашифрованная ссылка Happ (happ://crypt...). Расшифровать её может только приложение Happ; в NekoRay NT5 нет совместимого декодера. Попросите у провайдера обычный адрес подписки (https://...) и добавьте его.
+
+en: This Happ link type is not supported. Supported: happ://add/<subscription address>.
+ru: Этот тип ссылок Happ не поддерживается. Поддерживается: happ://add/<адрес подписки>.
+
+en: The happ://add/ link does not contain a valid subscription address. {0}
+ru: Ссылка happ://add/ не содержит корректного адреса подписки. {0}
+
+en: the text contains no share links ({0} line(s) of other text). Paste only the links, one per line.
+ru: в тексте нет ссылок на серверы ({0} строк(и) другого текста). Вставьте только ссылки, по одной на строку.
+
+en: no supported share links were found.
+ru: поддерживаемые ссылки на серверы не найдены.
+
+en: the answer contains no supported share links.
+ru: в ответе нет поддерживаемых ссылок на серверы.
+
+en: The provider reports that the device limit of this subscription is reached. Remove an old device in the provider's panel or bot, then try again.
+ru: Провайдер сообщает, что лимит устройств этой подписки исчерпан. Удалите старое устройство в панели или боте провайдера и повторите попытку.
+
+en: The provider reports that it does not accept device ids (HWID) here.
+ru: Провайдер сообщает, что не принимает идентификаторы устройств (HWID).
+
+en: The provider looks Happ-compatible. If it limits devices, tick "Use Happ-compatible HWID" and check again.
+ru: Провайдер похож на совместимый с Happ. Если он ограничивает число устройств, отметьте «Использовать HWID, совместимый с Happ» и проверьте снова.
+
+en: If the provider requires a device id (for example a Happ subscription), tick "Use Happ-compatible HWID" and check again.
+ru: Если провайдеру нужен идентификатор устройства (например, для подписки Happ), отметьте «Использовать HWID, совместимый с Happ» и проверьте снова.
+
+en: used {0} of {1}
+ru: использовано {0} из {1}
+
+en: used {0} (no limit)
+ru: использовано {0} (без ограничения)
+
+en: EXPIRED {0}
+ru: ИСТЕКЛА {0}
+
+en: expires {0}
+ru: действует до {0}
+
+en: missing
+ru: отсутствует
+
+en: {0} certificates, Mozilla data as of {1}
+ru: сертификатов: {0}, данные Mozilla от {1}
+
+en: {0} certificates
+ru: сертификатов: {0}
+
+en: {0} is missing next to the program.
+ru: {0} отсутствует рядом с программой.
+
+en: {0} is too large to be a CA bundle.
+ru: {0} слишком велик для набора сертификатов.
+
+en: {0} is damaged (an incomplete certificate after {1} good ones). Replace it with the cacert.pem of the program package.
+ru: {0} повреждён (неполный сертификат после {1} правильных). Замените его файлом cacert.pem из комплекта программы.
+
+en: {0} is damaged (certificate {1} cannot be read). Replace it with the cacert.pem of the program package.
+ru: {0} повреждён (сертификат {1} не читается). Замените его файлом cacert.pem из комплекта программы.
+
+en: {0} contains no certificates. Replace it with the cacert.pem of the program package.
+ru: {0} не содержит сертификатов. Замените его файлом cacert.pem из комплекта программы.
+
+en: OK
+ru: ОК
+
+en: Note
+ru: Примечание
+
+en: Missing
+ru: Нет
+
+en: Windows 2000: xray.exe and nt5helper.exe are built for Windows 2000 (NT 5.0); the Core and Helper rows show whether they load here. Tested: Windows 2000 SP4 x86 without KernelX, with .NET Framework 2.0 and the required root certificates installed. Other configurations may behave differently. Windows XP SP3 is the main target system.
+ru: Windows 2000: xray.exe и nt5helper.exe собраны для Windows 2000 (NT 5.0); строки Core и Helper показывают, загружаются ли они здесь. Проверено: Windows 2000 SP4 x86 без KernelX, с установленными .NET Framework 2.0 и нужными корневыми сертификатами. В других конфигурациях работа может отличаться. Основная система — Windows XP SP3.
+
+en: Supported. Windows XP SP3 is the main target system.
+ru: Поддерживается. Windows XP SP3 — основная целевая система.
+
+en: Core (xray.exe)
+ru: Ядро (xray.exe)
+
+en: not found
+ru: не найдено
+
+en: xray.exe is not next to NekoRayNT5.exe ({0}). Without it the program cannot connect. Copy xray.exe from the NekoRay NT5 package again: it is a build of Xray 1.8.3 for Windows XP; the official Xray downloads do not run on XP.
+ru: xray.exe нет рядом с NekoRayNT5.exe ({0}). Без него программа не может подключаться. Скопируйте xray.exe из комплекта NekoRay NT5 заново: это сборка Xray 1.8.3 для Windows XP; официальные сборки Xray на XP не работают.
+
+en: cannot run here
+ru: не может работать здесь
+
+en: present, loadable
+ru: есть, загружается
+
+en: Xray core next to the program. It is started only by this program and stopped with it.
+ru: Ядро Xray рядом с программой. Оно запускается только этой программой и останавливается вместе с ней.
+
+en: Helper (nt5helper.exe)
+ru: Помощник (nt5helper.exe)
+
+en: nt5helper.exe downloads HTTPS subscriptions with current TLS. {0} Without it HTTPS subscriptions need curl.exe. Share links and http:// subscriptions work.
+ru: nt5helper.exe загружает HTTPS-подписки с современным TLS. {0} Без него для HTTPS-подписок нужен curl.exe. Ссылки на серверы и подписки по http:// работают.
+
+en: Copy it from the NekoRay NT5 package next to NekoRayNT5.exe.
+ru: Скопируйте его из комплекта NekoRay NT5 рядом с NekoRayNT5.exe.
+
+en: Used for HTTPS subscriptions (TLS 1.2/1.3, certificates checked).
+ru: Используется для HTTPS-подписок (TLS 1.2/1.3, сертификаты проверяются).
+
+en: Certificates (cacert.pem)
+ru: Сертификаты (cacert.pem)
+
+en: Without cacert.pem, HTTPS subscriptions are checked against the Windows certificate store, which is outdated on Windows XP ("unknown certificate authority"). Copy cacert.pem from the package, or download the current Mozilla CA bundle (cacert.pem) from the curl project page and put it next to NekoRayNT5.exe.
+ru: Без cacert.pem HTTPS-подписки проверяются по хранилищу сертификатов Windows, которое на Windows XP устарело («unknown certificate authority»). Скопируйте cacert.pem из комплекта или скачайте актуальный набор сертификатов Mozilla (cacert.pem) со страницы проекта curl и положите его рядом с NekoRayNT5.exe.
+
+en: damaged
+ru: повреждён
+
+en: Replace it with a fresh copy from the package or from the curl project page.
+ru: Замените его свежей копией из комплекта или со страницы проекта curl.
+
+en: Trusted root certificates for HTTPS subscriptions (Mozilla CA bundle). Certificates are always checked.
+ru: Доверенные корневые сертификаты для HTTPS-подписок (набор Mozilla). Сертификаты проверяются всегда.
+
+en: The bundle is older than two years: replace it with a current one.
+ru: Набору больше двух лет: замените его актуальным.
+
+en: curl.exe (optional)
+ru: curl.exe (необязательно)
+
+en: present
+ru: есть
+
+en: not present (not needed)
+ru: нет (не требуется)
+
+en: Only a fallback for HTTPS subscriptions when nt5helper.exe cannot run.
+ru: Только запасной вариант для HTTPS-подписок, если nt5helper.exe не может работать.
+
+en: Local ports
+ru: Локальные порты
+
+en: SOCKS {0}, HTTP {1}: free
+ru: SOCKS {0}, HTTP {1}: свободны
+
+en: The core listens on these ports ({0}).
+ru: Ядро слушает эти порты ({0}).
+
+en: SOCKS {0}, HTTP {1}: in use or refused
+ru: SOCKS {0}, HTTP {1}: заняты или запрещены
+
+en: SOCKS port {0}: {1}.
+ru: порт SOCKS {0}: {1}.
+
+en: HTTP port {0}: {1}.
+ru: порт HTTP {0}: {1}.
+
+en: This is normal while connected (the core uses them). Otherwise choose other ports in Settings - Connections.
+ru: Во время подключения это нормально (порты занимает ядро). Иначе выберите другие порты в «Настройки — Подключения».
+
+en: The HWID must be {0} to {1} characters long.
+ru: HWID должен содержать от {0} до {1} символов.
+
+en: The HWID may contain only Latin letters, digits and - _ . :
+ru: HWID может содержать только латинские буквы, цифры и - _ . :
+
+en: (not created yet)
+ru: (ещё не создан)
+
+en: cannot resolve the address
+ru: не удаётся определить адрес
+
+en: timeout
+ru: тайм-аут
+
+en: the test URL must start with http://
+ru: адрес теста должен начинаться с http://
+
+en: no connection through the profile (HTTP {0})
+ru: нет соединения через профиль (HTTP {0})
+
+en: timeout or connection closed
+ru: тайм-аут или соединение закрыто
+
+en: Connection closed.
+ru: Соединение закрыто.
+
+en: Not an HTTP response.
+ru: Это не HTTP-ответ.
+
+en: Link {0}: {1}
+ru: Ссылка {0}: {1}
+
+en: Links {0} and {1} more: {2}
+ru: Ссылки {0} и ещё {1}: {2}
+
+en: Links {0}: {1}
+ru: Ссылки {0}: {1}
+
+en: ... and {0} more link(s) that cannot be used
+ru: ... и ещё {0} непригодных ссылок
+
+en: {0} new, {1} changed, {2} unchanged, {3} removed
+ru: новых: {0}, изменено: {1}, без изменений: {2}, удалено: {3}
+
+en: {0} duplicate(s) in the subscription ignored
+ru: дубликатов в подписке пропущено: {0}
+
+en: The profile file is damaged and could not be read.
+ru: Файл профилей повреждён и не может быть прочитан.
+
+en: The profile file could not be opened: {0}
+ru: Не удалось открыть файл профилей: {0}
+
+en: The profile file has an unknown structure.
+ru: У файла профилей неизвестная структура.
+
+en: A safety copy could not be made: {0}
+ru: Не удалось сделать страховочную копию: {0}
+
+en: The previous version ({0}) was loaded instead; changes made after it was saved are lost.\nThe damaged file was copied to:\n{1}
+ru: Вместо него загружена предыдущая версия ({0}); изменения, сделанные после её сохранения, потеряны.\nПовреждённый файл скопирован в:\n{1}
+
+en: No usable previous version was found; the list starts empty.\nThe damaged file was copied to:\n{0}
+ru: Пригодной предыдущей версии нет; список начинается пустым.\nПовреждённый файл скопирован в:\n{0}
+
+en: The profile file was written by a newer version of the program (format {0}, this version supports {1}).
+ru: Файл профилей записан более новой версией программы (формат {0}, эта версия поддерживает {1}).
+
+en: {0} record(s) in the profile file are invalid and were skipped.
+ru: Записей в файле профилей с ошибками, пропущено: {0}.
+
+en: {0} profile(s) had an id used twice and got a new id.
+ru: Профилей с повторяющимся id, получили новый id: {0}.
+
+en: The original file was copied to:\n{0}
+ru: Исходный файл скопирован в:\n{0}
+
+en: The file is left untouched; changes made now will not be saved.
+ru: Файл не изменён; изменения, сделанные сейчас, не будут сохранены.
+
+en: The group no longer exists.
+ru: Группа больше не существует.
+
+en: The profile no longer exists.
+ru: Профиль больше не существует.
+
+en: The default group cannot be deleted.
+ru: Группу по умолчанию удалить нельзя.
+
+en: The file contains no profiles.
+ru: В файле нет профилей.
+
+en: This profile file is opened for reading only.
+ru: Этот файл профилей открыт только для чтения.
+
+en: Changes are not saved to protect the existing file.
+ru: Изменения не сохраняются, чтобы защитить существующий файл.
+
+en: Unsupported profile type.
+ru: Неподдерживаемый тип профиля.
+
+en: Server address is empty.
+ru: Адрес сервера пуст.
+
+en: Server address contains invalid characters.
+ru: Адрес сервера содержит недопустимые символы.
+
+en: Port must be a number from 1 to 65535.
+ru: Порт должен быть числом от 1 до 65535.
+
+en: Name must not contain control characters.
+ru: Имя не должно содержать управляющих символов.
+
+en: UUID is empty.
+ru: UUID пуст.
+
+en: UUID must look like xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx (hexadecimal digits).
+ru: UUID должен выглядеть как xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx (шестнадцатеричные цифры).
+
+en: Unsupported encryption: VLESS supports only "none".
+ru: Неподдерживаемое шифрование: VLESS поддерживает только "none".
+
+en: Unsupported VMess security: use auto, aes-128-gcm, chacha20-poly1305, none or zero.
+ru: Неподдерживаемая защита VMess: используйте auto, aes-128-gcm, chacha20-poly1305, none или zero.
+
+en: Unsupported Shadowsocks method.
+ru: Неподдерживаемый метод Shadowsocks.
+
+en: Password is empty.
+ru: Пароль пуст.
+
+en: User name and password must not contain control characters.
+ru: Имя пользователя и пароль не должны содержать управляющих символов.
+
+en: A password is set but the user name is empty.
+ru: Задан пароль, но имя пользователя пусто.
+
+en: This profile type supports only plain TCP without TLS.
+ru: Этот тип профиля поддерживает только обычный TCP без TLS.
+
+en: Unsupported transport: use tcp, ws, grpc or http.
+ru: Неподдерживаемый транспорт: используйте tcp, ws, grpc или http.
+
+en: Unsupported security: use none, tls or reality.
+ru: Неподдерживаемая защита: используйте none, tls или reality.
+
+en: Unsupported flow: use an empty value, xtls-rprx-vision or xtls-rprx-vision-udp443.
+ru: Неподдерживаемый flow: оставьте пустым или используйте xtls-rprx-vision или xtls-rprx-vision-udp443.
+
+en: Flow (XTLS Vision) requires VLESS over TCP with TLS or REALITY.
+ru: Flow (XTLS Vision) требует VLESS поверх TCP с TLS или REALITY.
+
+en: HTTP/2 transport requires TLS or REALITY.
+ru: Транспорт HTTP/2 требует TLS или REALITY.
+
+en: REALITY cannot be used with the WebSocket transport.
+ru: REALITY нельзя использовать с транспортом WebSocket.
+
+en: SNI contains invalid characters.
+ru: SNI содержит недопустимые символы.
+
+en: Host, path, ALPN and SpiderX must not contain control characters.
+ru: Host, путь, ALPN и SpiderX не должны содержать управляющих символов.
+
+en: Fingerprint must be a short name such as "chrome".
+ru: Отпечаток должен быть коротким именем, например "chrome".
+
+en: REALITY requires a uTLS fingerprint, for example "chrome".
+ru: Для REALITY нужен отпечаток uTLS, например "chrome".
+
+en: REALITY public key (pbk) is empty.
+ru: Открытый ключ REALITY (pbk) пуст.
+
+en: REALITY public key (pbk) must be 32 bytes in URL-safe Base64 (43 characters).
+ru: Открытый ключ REALITY (pbk) должен быть 32 байтами в URL-safe Base64 (43 символа).
+
+en: REALITY short id (sid) must be up to 16 hexadecimal digits, an even number of them.
+ru: Короткий id REALITY (sid) — до 16 шестнадцатеричных цифр, чётное их число.
+
+en: REALITY SpiderX must start with "/".
+ru: SpiderX для REALITY должен начинаться с "/".
+
+en: Public key, short id and SpiderX apply to REALITY only.
+ru: Открытый ключ, короткий id и SpiderX относятся только к REALITY.
+
+en: The settings file is damaged; default settings are used. The file was copied to:\n{0}
+ru: Файл настроек повреждён; используются настройки по умолчанию. Файл скопирован в:\n{0}
+
+en: The settings file is damaged; default settings are used.
+ru: Файл настроек повреждён; используются настройки по умолчанию.
+
+en: The settings file could not be opened; default settings are used: {0}
+ru: Не удалось открыть файл настроек; используются настройки по умолчанию: {0}
+
+en: The link is empty.
+ru: Ссылка пуста.
+
+en: Unsupported link: it must start with vless://, vmess://, trojan://, ss:// or socks://
+ru: Неподдерживаемая ссылка: она должна начинаться с vless://, vmess://, trojan://, ss:// или socks://
+
+en: a web address inside a list of links. Add a subscription address on its own.
+ru: веб-адрес внутри списка ссылок. Адрес подписки добавляйте отдельно.
+
+en: The link has no user ID: expected vless://UUID@server:port
+ru: В ссылке нет ID пользователя: ожидается vless://UUID@сервер:порт
+
+en: The link has no password: expected trojan://password@server:port
+ru: В ссылке нет пароля: ожидается trojan://пароль@сервер:порт
+
+en: Unsupported transport "{0}". Supported: tcp, ws, grpc, http.
+ru: Неподдерживаемый транспорт "{0}". Поддерживаются: tcp, ws, grpc, http.
+
+en: Unsupported TCP header type "{0}".
+ru: Неподдерживаемый тип заголовка TCP "{0}".
+
+en: Unsupported security "{0}". Supported: none, tls, reality.
+ru: Неподдерживаемая защита "{0}". Поддерживаются: none, tls, reality.
+
+en: The VMess link is damaged: Base64 JSON data expected.
+ru: Ссылка VMess повреждена: ожидаются данные JSON в Base64.
+
+en: VMess with alterId other than 0 (legacy MD5 mode) is not supported.
+ru: VMess с alterId, отличным от 0 (устаревший режим MD5), не поддерживается.
+
+en: profile name
+ru: имени профиля
+
+en: The Shadowsocks link is damaged.
+ru: Ссылка Shadowsocks повреждена.
+
+en: Shadowsocks plugins are not supported.
+ru: Плагины Shadowsocks не поддерживаются.
+
+en: The Shadowsocks link is damaged: method and password expected.
+ru: Ссылка Shadowsocks повреждена: ожидаются метод и пароль.
+
+en: Profiles of type {0} have no share link format.
+ru: Для профилей типа {0} нет формата ссылки.
+
+en: The SOCKS link is damaged: user name and password expected.
+ru: Ссылка SOCKS повреждена: ожидаются имя пользователя и пароль.
+
+en: user part
+ru: части пользователя
+
+en: Invalid IPv6 server address: closing bracket is missing.
+ru: Неверный IPv6-адрес сервера: нет закрывающей скобки.
+
+en: Invalid server address.
+ru: Неверный адрес сервера.
+
+en: Invalid server address: an IPv6 address must be in [brackets].
+ru: Неверный адрес сервера: IPv6-адрес должен быть в [квадратных скобках].
+
+en: server address
+ru: адресе сервера
+
+en: The link has no port: expected server:port
+ru: В ссылке нет порта: ожидается сервер:порт
+
+en: parameter name
+ru: имени параметра
+
+en: parameter "{0}"
+ru: параметре "{0}"
+
+en: Invalid URL encoding in the {0}.
+ru: Неверное URL-кодирование в {0}.
+
+en: The subscription address is empty.
+ru: Адрес подписки пуст.
+
+en: The subscription address must be a valid http:// or https:// URL.
+ru: Адрес подписки должен быть корректным URL http:// или https://.
+
+en: The subscription address must not contain spaces, quotes or non-ASCII characters (percent-encode them).
+ru: Адрес подписки не должен содержать пробелы, кавычки и не-ASCII символы (закодируйте их через %).
+
+en: nt5helper.exe cannot run here: {0}
+ru: nt5helper.exe не может работать здесь: {0}
+
+en: the built-in client of .NET Framework 2.0 failed ({0}); it supports only TLS 1.0, which most servers no longer accept
+ru: встроенный клиент .NET Framework 2.0 не справился ({0}); он поддерживает только TLS 1.0, который большинство серверов уже не принимает
+
+en: The HTTPS download failed: {0}.\n\nWhat you can do:\n - put nt5helper.exe (or curl.exe with its CA bundle) next to NekoRayNT5.exe and try again;\n - or open the address in a browser, save the page as a text file and add that file.
+ru: Загрузка по HTTPS не удалась: {0}.\n\nЧто можно сделать:\n - положите nt5helper.exe (или curl.exe с его набором сертификатов) рядом с NekoRayNT5.exe и повторите;\n - или откройте адрес в браузере, сохраните страницу как текстовый файл и добавьте этот файл.
+
+en: The server sent a redirect without a valid address (HTTP {0}).
+ru: Сервер прислал перенаправление без корректного адреса (HTTP {0}).
+
+en: The server redirected from HTTPS to an insecure address; the download was refused.
+ru: Сервер перенаправил с HTTPS на незащищённый адрес; загрузка отклонена.
+
+en: The server redirected to an unsupported address.
+ru: Сервер перенаправил на неподдерживаемый адрес.
+
+en: Too many redirects.
+ru: Слишком много перенаправлений.
+
+en: The server answered HTTP {0}.
+ru: Сервер ответил HTTP {0}.
+
+en: The server did not answer within {0} seconds.
+ru: Сервер не ответил за {0} с.
+
+en: The server name could not be resolved (check the address and the network).
+ru: Не удалось определить имя сервера (проверьте адрес и сеть).
+
+en: Could not connect to the server.
+ru: Не удалось подключиться к серверу.
+
+en: The download failed ({0}).
+ru: Загрузка не удалась ({0}).
+
+en: (access denied: the address or its token may be wrong or expired, or the provider requires a device id - see "Use Happ-compatible HWID")
+ru: (доступ запрещён: адрес или его токен неверен либо устарел, или провайдеру нужен идентификатор устройства — см. «Использовать HWID, совместимый с Happ»)
+
+en: (not found: check the address)
+ru: (не найдено: проверьте адрес)
+
+en: (too many requests: try again later)
+ru: (слишком много запросов: повторите позже)
+
+en: (server error: try again later)
+ru: (ошибка сервера: повторите позже)
+
+en: The server sent a file of type "{0}", not a subscription.
+ru: Сервер прислал файл типа "{0}", а не подписку.
+
+en: The subscription is larger than {0} MB.
+ru: Подписка больше {0} МБ.
+
+en: HTTPS subscriptions cannot be checked: {0}
+ru: HTTPS-подписки невозможно проверить: {0}
+
+en: nt5helper.exe does not accept the arguments of this version: copy nt5helper.exe from the same package as NekoRayNT5.exe.
+ru: nt5helper.exe не принимает аргументы этой версии: скопируйте nt5helper.exe из того же комплекта, что и NekoRayNT5.exe.
+
+en: {0} could not be started: {1}
+ru: {0} не удалось запустить: {1}
+
+en: no answer in time
+ru: нет ответа вовремя
+
+en: exit code {0}
+ru: код выхода {0}
+
+en: {0} could not download the subscription ({1}): {2}
+ru: {0} не смог загрузить подписку ({1}): {2}
+
+en: {0} could not download the subscription ({1}).
+ru: {0} не смог загрузить подписку ({1}).
+
+en: The server sent an empty answer.
+ru: Сервер прислал пустой ответ.
+
+en: The server sent binary data, not a subscription.
+ru: Сервер прислал двоичные данные, а не подписку.
+
+en: The answer is not UTF-8 text, so it is not a subscription.
+ru: Ответ не является текстом UTF-8, значит, это не подписка.
+
+en: The server sent a web page instead of a subscription. The address may be wrong, expired or require a login.
+ru: Сервер прислал веб-страницу вместо подписки. Адрес может быть неверным, устаревшим или требовать входа.
+
+en: The data is empty.
+ru: Данные пусты.
+
+en: The data is a configuration file (Xray/sing-box JSON or Clash YAML), not a list of share links; NekoRay NT5 can import only share links. Ask the provider for a v2rayN-compatible (Base64) subscription address.
+ru: Данные — это файл конфигурации (JSON Xray/sing-box или YAML Clash), а не список ссылок; NekoRay NT5 импортирует только ссылки на серверы. Попросите у провайдера адрес подписки, совместимой с v2rayN (Base64).
+
+en: The data is neither a list of links nor Base64 text.
+ru: Данные не являются ни списком ссылок, ни текстом Base64.
+
+en: The data contains no share links.
+ru: В данных нет ссылок на серверы.
+
+en: directly
+ru: напрямую
+
+en: Subscriptions are set to download only through the active connection (Settings - Subscriptions), but nothing is connected. Connect first, or choose Auto or Direct.
+ru: Подписки настроены на загрузку только через активное подключение («Настройки — Подписки»), но подключения нет. Сначала подключитесь или выберите «Автоматически» либо «Напрямую».
+
+en: through the active connection
+ru: через активное подключение
+
+en: directly (through the active connection it failed: {0})
+ru: напрямую (через активное подключение не удалось: {0})
+
+en: Through the active connection: {0}\nDirectly: {1}
+ru: Через активное подключение: {0}\nНапрямую: {1}
+
+en: only through the active connection
+ru: только через активное подключение
+
+en: automatically
+ru: автоматически
+
+en: Windows did not accept the proxy settings.
+ru: Windows не приняла настройки прокси.
+
+en: The system proxy was not enabled: {0}
+ru: Системный прокси не включён: {0}
+
+en: The original settings are kept in {0}
+ru: Исходные настройки сохранены в {0}
+
+en: The system proxy settings of {0} connection(s) could not be restored: {1}
+ru: Не удалось восстановить настройки системного прокси для подключений ({0}): {1}
+
+en: System proxy settings restored: {0} connection(s), {1} left as is (changed meanwhile or no longer present).
+ru: Настройки системного прокси восстановлены, подключений: {0}; оставлено как есть: {1} (изменены за это время или больше не существуют).
+
+en: System proxy settings restored: {0} connection(s).
+ru: Настройки системного прокси восстановлены, подключений: {0}.
+
+en: The backup of the system proxy settings is damaged: {0}\nCheck the proxy settings in Control Panel - Internet Options manually, then delete this file.
+ru: Резервная копия настроек системного прокси повреждена: {0}\nПроверьте настройки прокси вручную в «Панель управления — Свойства обозревателя», затем удалите этот файл.
+
+en: Add servers or a subscription
+ru: Добавить серверы или подписку
+
+en: Paste share links (vless://, vmess://, trojan://, ss://, socks://), a subscription address\n(https://...) or a happ://add/ link, or open a file:
+ru: Вставьте ссылки на серверы (vless://, vmess://, trojan://, ss://, socks://), адрес подписки\n(https://...) или ссылку happ://add/ либо откройте файл:
+
+en: Paste
+ru: Вставить
+
+en: Open file...
+ru: Открыть файл...
+
+en: Use Happ-compatible HWID
+ru: Использовать HWID, совместимый с Happ
+
+en: Sends the device id of this installation ({0}) as Happ does. Only for providers that require it; change it in Settings - Subscriptions.
+ru: Отправляет идентификатор устройства этой установки ({0}) так же, как Happ. Только для провайдеров, которым он нужен; изменить его можно в «Настройки — Подписки».
+
+en: Check
+ru: Проверить
+
+en: What will be added
+ru: Что будет добавлено
+
+en: Keep as a subscription (a new group, updated from this address)
+ru: Сохранить как подписку (новая группа, обновляется по этому адресу)
+
+en: Group name:
+ru: Имя группы:
+
+en: Skip servers that are already in the list
+ru: Пропустить серверы, которые уже есть в списке
+
+en: Add
+ru: Добавить
+
+en: Cancel
+ru: Отмена
+
+en: The clipboard contains no text.
+ru: В буфере обмена нет текста.
+
+en: The clipboard is busy. Try again.
+ru: Буфер обмена занят. Повторите попытку.
+
+en: Open a file with share links or a subscription
+ru: Открыть файл со ссылками на серверы или подпиской
+
+en: Text files (*.txt)|*.txt|All files (*.*)|*.*
+ru: Текстовые файлы (*.txt)|*.txt|Все файлы (*.*)|*.*
+
+en: the file is larger than 5 MB.
+ru: файл больше 5 МБ.
+
+en: The file cannot be used: {0}
+ru: Файл нельзя использовать: {0}
+
+en: Press Check to download the address and see what it contains. Nothing is saved before Add.
+ru: Нажмите «Проверить», чтобы загрузить адрес и посмотреть его содержимое. До нажатия «Добавить» ничего не сохраняется.
+
+en: Press Check to see the servers.
+ru: Нажмите «Проверить», чтобы увидеть серверы.
+
+en: Press Check again.
+ru: Нажмите «Проверить» ещё раз.
+
+en: Downloading {0} with the HWID... (up to {1} seconds)
+ru: Загрузка {0} с HWID... (до {1} с)
+
+en: Downloading {0}... (up to {1} seconds)
+ru: Загрузка {0}... (до {1} с)
+
+en: Enter a name for the subscription group.
+ru: Введите имя группы подписки.
+
+en: Diagnostics
+ru: Диагностика
+
+en: Component
+ru: Компонент
+
+en: Status
+ru: Состояние
+
+en: Details
+ru: Подробности
+
+en: Open link
+ru: Открыть ссылку
+
+en: Re-check
+ru: Проверить снова
+
+en: Copy report
+ru: Копировать отчёт
+
+en: Close
+ru: Закрыть
+
+en: Official page: {0}
+ru: Официальная страница: {0}
+
+en: The browser could not be opened ({0}).\n\nOpen this address yourself:\n{1}
+ru: Не удалось открыть браузер ({0}).\n\nОткройте этот адрес сами:\n{1}
+
+en: The clipboard is busy: {0}
+ru: Буфер обмена занят: {0}
+
+en: Welcome to {0}
+ru: Добро пожаловать в {0}
+
+en: 1. Program files
+ru: 1. Файлы программы
+
+en: Details...
+ru: Подробнее...
+
+en: 2. Add a server or subscription
+ru: 2. Добавьте сервер или подписку
+
+en: Paste a share link, a subscription address or a happ://add/ link.
+ru: Вставьте ссылку на сервер, адрес подписки или ссылку happ://add/.
+
+en: Add...
+ru: Добавить...
+
+en: 3. Check
+ru: 3. Проверка
+
+en: 4. Connect
+ru: 4. Подключение
+
+en: Connects with the first server and turns on the system proxy for programs that use it.
+ru: Подключается к первому серверу и включает системный прокси для программ, которые его используют.
+
+en: Connect
+ru: Подключить
+
+en: Everything needed is in place.
+ru: Всё необходимое на месте.
+
+en: Connecting works; {0} optional part(s) missing - see Details.
+ru: Подключение работает; не хватает необязательных частей: {0} — см. «Подробнее».
+
+en: Connecting is NOT possible yet: {0} See Details.
+ru: Подключение пока НЕВОЗМОЖНО: {0} См. «Подробнее».
+
+en: Fix step 1 first.
+ru: Сначала исправьте шаг 1.
+
+en: Ready: the servers are in the list. Select one later with a single click, connect with a double click.
+ru: Готово: серверы в списке. Потом выберите сервер одним щелчком, подключайтесь двойным.
+
+en: Add a server first.
+ru: Сначала добавьте сервер.
+
+en: Name
+ru: Имя
+
+en: Subscription URL
+ru: URL подписки
+
+en: An http:// or https:// address that returns share links (plain or Base64). It is downloaded right away.
+ru: Адрес http:// или https://, который возвращает ссылки на серверы (обычным текстом или в Base64). Он загружается сразу.
+
+en: Leave the URL empty for an ordinary group. Only http:// and https:// addresses are accepted.
+ru: Для обычной группы оставьте URL пустым. Принимаются только адреса http:// и https://.
+
+en: The name is empty.
+ru: Имя пусто.
+
+en: Groups
+ru: Группы
+
+en: Profiles
+ru: Профили
+
+en: Kind
+ru: Вид
+
+en: New...
+ru: Создать...
+
+en: Edit...
+ru: Изменить...
+
+en: Delete
+ru: Удалить
+
+en: Subscription
+ru: Подписка
+
+en: Group
+ru: Группа
+
+en: The change was not saved.
+ru: Изменение не сохранено.
+
+en: New group
+ru: Новая группа
+
+en: Edit group
+ru: Изменить группу
+
+en: Delete group "{0}" together with its {1} profile(s)?
+ru: Удалить группу "{0}" вместе с её профилями ({1})?
+
+en: Delete group "{0}"?
+ru: Удалить группу "{0}"?
+
+en: System Proxy
+ru: Системный прокси
+
+en: Type
+ru: Тип
+
+en: Address
+ru: Адрес
+
+en: Test Result
+ru: Результат теста
+
+en: Log
+ru: Журнал
+
+en: Not Running
+ru: Не запущено
+
+en: The previous session did not restore the system proxy settings; restoring them now.
+ru: Прошлый сеанс не восстановил настройки системного прокси; восстанавливаем сейчас.
+
+en: Profiles could not be loaded: {0}
+ru: Не удалось загрузить профили: {0}
+
+en: Profiles loaded: {0}, groups: {1}
+ru: Загружено профилей: {0}, групп: {1}
+
+en: Storage problem, see the message box.
+ru: Проблема с хранилищем, см. окно сообщения.
+
+en: CA bundle: {0} is missing next to the program; HTTPS subscriptions are checked against the Windows certificate store, which is outdated on Windows XP.
+ru: Набор сертификатов: {0} отсутствует рядом с программой; HTTPS-подписки проверяются по хранилищу сертификатов Windows, которое на Windows XP устарело.
+
+en: CA bundle: {0} HTTPS subscriptions will not be downloaded until it is replaced.
+ru: Набор сертификатов: {0} HTTPS-подписки не будут загружаться, пока его не заменят.
+
+en: CA bundle: {0} - older than two years: replace it with a current one.
+ru: Набор сертификатов: {0} — старше двух лет: замените его актуальным.
+
+en: CA bundle: {0}.
+ru: Набор сертификатов: {0}.
+
+en: Core not found: {0}. Put xray.exe next to the program to connect.
+ru: Ядро не найдено: {0}. Чтобы подключаться, положите xray.exe рядом с программой.
+
+en: The core cannot be started: {0}
+ru: Ядро не удаётся запустить: {0}
+
+en: Core: {0}
+ru: Ядро: {0}
+
+en: The core does not start (exit code {0}).
+ru: Ядро не запускается (код выхода {0}).
+
+en: Still running here. Use Exit in this menu to quit.
+ru: Программа продолжает работать здесь. Чтобы выйти, выберите «Выход» в этом меню.
+
+en: The system proxy settings could not be restored:\n\n{0}
+ru: Не удалось восстановить настройки системного прокси:\n\n{0}
+
+en: &Program
+ru: &Программа
+
+en: Add servers or subscription...
+ru: Добавить серверы или подписку...
+
+en: Start with system
+ru: Запускать вместе с системой
+
+en: Remember last profile
+ru: Запоминать последний профиль
+
+en: Allow other devices to connect
+ru: Разрешить подключение других устройств
+
+en: Enable System Proxy
+ru: Включить системный прокси
+
+en: Disable
+ru: Выключить
+
+en: Restart Proxy
+ru: Перезапустить прокси
+
+en: Exit
+ru: Выход
+
+en: P&references
+ru: П&араметры
+
+en: Settings...
+ru: Настройки...
+
+en: Diagnostics...
+ru: Диагностика...
+
+en: Open Config Folder
+ru: Открыть папку настроек
+
+en: Export profile backup...
+ru: Экспорт резервной копии профилей...
+
+en: Import profile backup...
+ru: Импорт резервной копии профилей...
+
+en: Copy diagnostic info (no secrets)
+ru: Копировать сведения для диагностики (без секретов)
+
+en: &Server
+ru: &Сервер
+
+en: New profile
+ru: Новый профиль
+
+en: Add (links, subscription, happ://add, file)...
+ru: Добавить (ссылки, подписка, happ://add, файл)...
+
+en: Start (double click, Enter)
+ru: Подключить (двойной щелчок, Enter)
+
+en: Stop
+ru: Остановить
+
+en: Edit (F2)
+ru: Изменить (F2)
+
+en: Clone
+ru: Клонировать
+
+en: Move Up
+ru: Переместить вверх
+
+en: Move Down
+ru: Переместить вниз
+
+en: Move to group
+ru: Переместить в группу
+
+en: Copy to group
+ru: Копировать в группу
+
+en: Select All
+ru: Выделить все
+
+en: Share
+ru: Поделиться
+
+en: Copy links of selected
+ru: Копировать ссылки выбранных
+
+en: Export links to file...
+ru: Экспорт ссылок в файл...
+
+en: Export Xray config...
+ru: Экспорт конфигурации Xray...
+
+en: Current Group
+ru: Текущая группа
+
+en: Tcp Ping
+ru: TCP-пинг
+
+en: Url Test
+ru: URL-тест
+
+en: Stop tests
+ru: Остановить тесты
+
+en: Clear Test Result
+ru: Очистить результаты тестов
+
+en: Sort by name
+ru: Сортировать по имени
+
+en: Sort by address
+ru: Сортировать по адресу
+
+en: Sort by test result
+ru: Сортировать по результату теста
+
+en: Remove Duplicates
+ru: Удалить дубликаты
+
+en: Add subscription...
+ru: Добавить подписку...
+
+en: Update this subscription
+ru: Обновить эту подписку
+
+en: Update all subscriptions
+ru: Обновить все подписки
+
+en: Use Happ-compatible HWID for this subscription
+ru: Использовать HWID, совместимый с Happ, для этой подписки
+
+en: Update this subscription from a file...
+ru: Обновить эту подписку из файла...
+
+en: New group...
+ru: Новая группа...
+
+en: Rename...
+ru: Переименовать...
+
+en: Update subscription
+ru: Обновить подписку
+
+en: Manage groups...
+ru: Управление группами...
+
+en: Delete group (the default group stays)
+ru: Удалить группу (группа по умолчанию остаётся)
+
+en: Delete group...
+ru: Удалить группу...
+
+en: Group "{0}" created.
+ru: Группа "{0}" создана.
+
+en: Rename group
+ru: Переименовать группу
+
+en: Group "{0}" renamed to "{1}".
+ru: Группа "{0}" переименована в "{1}".
+
+en: Subscription "{0}": Happ-compatible HWID on.
+ru: Подписка "{0}": HWID, совместимый с Happ, включён.
+
+en: Subscription "{0}": Happ-compatible HWID off.
+ru: Подписка "{0}": HWID, совместимый с Happ, выключен.
+
+en: Delete the subscription group "{0}" together with its {1} server(s)?
+ru: Удалить группу подписки "{0}" вместе с её серверами ({1})?
+
+en: Delete the subscription group "{0}"?
+ru: Удалить группу подписки "{0}"?
+
+en: Delete the group "{0}" together with its {1} server(s)?
+ru: Удалить группу "{0}" вместе с её серверами ({1})?
+
+en: Delete the group "{0}"?
+ru: Удалить группу "{0}"?
+
+en: The running connection uses a server of this group; it will be stopped.
+ru: Текущее подключение использует сервер этой группы; оно будет остановлено.
+
+en: This cannot be undone. Other groups are not changed.
+ru: Это нельзя отменить. Другие группы не изменяются.
+
+en: Group "{0}" deleted with {1} server(s).
+ru: Группа "{0}" удалена вместе с серверами ({1}).
+
+en: Start
+ru: Подключить
+
+en: Edit
+ru: Изменить
+
+en: Copy links
+ru: Копировать ссылки
+
+en: Show Window
+ru: Показать окно
+
+en: Disconnect
+ru: Отключить
+
+en: Stop the connection (the system proxy is restored)
+ru: Остановить подключение (системный прокси восстанавливается)
+
+en: Connect with the selected server (or double-click it)
+ru: Подключиться к выбранному серверу (или дважды щёлкните по нему)
+
+en: Select a server first
+ru: Сначала выберите сервер
+
+en: Connecting: {0}
+ru: Подключение: {0}
+
+en: Running: {0}
+ru: Работает: {0}
+
+en: Stopping
+ru: Остановка
+
+en: Error (see the log)
+ru: Ошибка (см. журнал)
+
+en: Mode: System Proxy
+ru: Режим: системный прокси
+
+en: Mode: local ports only
+ru: Режим: только локальные порты
+
+en: (system proxy)
+ru: (системный прокси)
+
+en: Subscription: updating...
+ru: Подписка: обновляется...
+
+en: Subscription: last update FAILED (last success {0})
+ru: Подписка: последнее обновление НЕ УДАЛОСЬ (последний успех {0})
+
+en: Subscription: last update FAILED
+ru: Подписка: последнее обновление НЕ УДАЛОСЬ
+
+en: Subscription updated {0}
+ru: Подписка обновлена {0}
+
+en: Subscription: never updated
+ru: Подписка: ещё не обновлялась
+
+en: HWID on
+ru: HWID включён
+
+en: Select a profile in the list first.
+ru: Сначала выберите профиль в списке.
+
+en: The core was not found:\n{0}\n\nPut xray.exe next to the program.
+ru: Ядро не найдено:\n{0}\n\nПоложите xray.exe рядом с программой.
+
+en: The core cannot run on this system:\n\n{0}
+ru: Ядро не может работать в этой системе:\n\n{0}
+
+en: This profile cannot be used: {0}\n\nOpen it with Edit to correct it.
+ru: Этот профиль нельзя использовать: {0}\n\nОткройте его через «Изменить» и исправьте.
+
+en: "{0}" is already running.
+ru: "{0}" уже работает.
+
+en: "{0}" is already connecting.
+ru: "{0}" уже подключается.
+
+en: Starting profile "{0}"...
+ru: Запуск профиля "{0}"...
+
+en: The core is running with profile "{0}". SOCKS5 port {1}, HTTP port {2}.
+ru: Ядро работает с профилем "{0}". Порт SOCKS5 {1}, порт HTTP {2}.
+
+en: Note: this confirms the local core only. Use Server - Current Group - Url Test to check the server.
+ru: Примечание: это подтверждает работу только локального ядра. Проверить сервер можно через «Сервер — Текущая группа — URL-тест».
+
+en: Stopping the core...
+ru: Остановка ядра...
+
+en: The core is stopped.
+ru: Ядро остановлено.
+
+en: ERROR: {0}
+ru: ОШИБКА: {0}
+
+en: The connection stopped with an error. Open the window to see the log.
+ru: Подключение остановлено с ошибкой. Откройте окно, чтобы посмотреть журнал.
+
+en: The system proxy will not be switched on.
+ru: Системный прокси не будет включён.
+
+en: The system proxy will be switched on when the connection is up.
+ru: Системный прокси включится, когда подключение будет установлено.
+
+en: Start a profile first: the system proxy points at the local HTTP port of the core.
+ru: Сначала запустите профиль: системный прокси указывает на локальный HTTP-порт ядра.
+
+en: System proxy enabled: HTTP 127.0.0.1:{0}. The previous settings are saved and will be restored.
+ru: Системный прокси включён: HTTP 127.0.0.1:{0}. Прежние настройки сохранены и будут восстановлены.
+
+en: System proxy was NOT enabled: {0}
+ru: Системный прокси НЕ включён: {0}
+
+en: The system proxy could not be switched on; your proxy settings were not changed.\n\n{0}\n\nThe local ports keep working: programs can use HTTP 127.0.0.1:{1} or SOCKS5 127.0.0.1:{2} directly.
+ru: Не удалось включить системный прокси; ваши настройки прокси не изменены.\n\n{0}\n\nЛокальные порты продолжают работать: программы могут использовать HTTP 127.0.0.1:{1} или SOCKS5 127.0.0.1:{2} напрямую.
+
+en: System proxy settings were NOT restored: {0}
+ru: Настройки системного прокси НЕ восстановлены: {0}
+
+en: The autostart entry could not be changed: {0}
+ru: Не удалось изменить запись автозапуска: {0}
+
+en: The local ports will listen on all interfaces (0.0.0.0).
+ru: Локальные порты будут слушать все интерфейсы (0.0.0.0).
+
+en: The local ports will listen on 127.0.0.1 only.
+ru: Локальные порты будут слушать только 127.0.0.1.
+
+en: Settings were not saved: {0}
+ru: Настройки не сохранены: {0}
+
+en: Settings saved.
+ru: Настройки сохранены.
+
+en: Cannot open config folder: {0}
+ru: Не удалось открыть папку настроек: {0}
+
+en: Default
+ru: По умолчанию
+
+en: Profile added.
+ru: Профиль добавлен.
+
+en: Profile updated. It is running with the old values; use Program - Restart Proxy to apply the changes.
+ru: Профиль изменён. Он работает со старыми значениями; чтобы применить изменения, выберите «Программа — Перезапустить прокси».
+
+en: Profile updated.
+ru: Профиль изменён.
+
+en: (copy)
+ru: (копия)
+
+en: Profiles cloned: {0}
+ru: Клонировано профилей: {0}
+
+en: (this group)
+ru: (эта группа)
+
+en: Profiles moved: {0}
+ru: Перемещено профилей: {0}
+
+en: Profiles copied: {0}
+ru: Скопировано профилей: {0}
+
+en: Delete profile "{0}"?
+ru: Удалить профиль "{0}"?
+
+en: Delete {0} selected profiles?
+ru: Удалить выбранные профили ({0})?
+
+en: The running profile is among them; the connection will be stopped.
+ru: Среди них работающий профиль; подключение будет остановлено.
+
+en: Profiles deleted: {0}
+ru: Удалено профилей: {0}
+
+en: No duplicates in this group.
+ru: В этой группе нет дубликатов.
+
+en: Delete {0} duplicate profile(s)? The first of each kind is kept.
+ru: Удалить дубликаты профилей ({0})? Первый из каждого набора сохраняется.
+
+en: Duplicates deleted: {0}
+ru: Удалено дубликатов: {0}
+
+en: This subscription is already in the list as "{0}".\n\nUpdate that group with the servers just checked?
+ru: Эта подписка уже есть в списке как "{0}".\n\nОбновить эту группу только что проверенными серверами?
+
+en: downloaded {0}
+ru: загружено {0}
+
+en: Subscription "{0}" added (with the Happ-compatible HWID).
+ru: Подписка "{0}" добавлена (с HWID, совместимым с Happ).
+
+en: Subscription "{0}" added.
+ru: Подписка "{0}" добавлена.
+
+en: All servers of this source are already in the list; nothing was added.
+ru: Все серверы этого источника уже есть в списке; ничего не добавлено.
+
+en: Servers added: {0}; entries not usable: {1}.
+ru: Добавлено серверов: {0}; непригодных записей: {1}.
+
+en: Servers added: {0}.
+ru: Добавлено серверов: {0}.
+
+en: Add servers or a subscription (links, https:// address, happ://add/ link or file) - Ctrl+N
+ru: Добавить серверы или подписку (ссылки, адрес https://, ссылка happ://add/ или файл) — Ctrl+N
+
+en: Update subscriptions
+ru: Обновить подписки
+
+en: Download all subscriptions again (old servers are kept when a download fails)
+ru: Загрузить все подписки заново (при неудачной загрузке старые серверы сохраняются)
+
+en: Check the program files, certificates and ports
+ru: Проверить файлы программы, сертификаты и порты
+
+en: Nothing was imported.
+ru: Ничего не импортировано.
+
+en: Profiles imported: {0}
+ru: Импортировано профилей: {0}
+
+en: Links rejected: {0}
+ru: Отклонено ссылок: {0}
+
+en: Imported: {0}. Not imported: {1}.
+ru: Импортировано: {0}. Не импортировано: {1}.
+
+en: The links could not be exported: {0}
+ru: Не удалось экспортировать ссылки: {0}
+
+en: Links exported: {0} (clipboard)
+ru: Экспортировано ссылок: {0} (буфер обмена)
+
+en: Links exported: {0} (file)
+ru: Экспортировано ссылок: {0} (файл)
+
+en: {0} profile(s) were skipped: HTTP proxy profiles have no share link format.
+ru: Пропущено профилей: {0} — у профилей HTTP-прокси нет формата ссылки.
+
+en: Export links (the file will contain the credentials of the profiles)
+ru: Экспорт ссылок (файл будет содержать учётные данные профилей)
+
+en: Text files (*.txt)|*.txt
+ru: Текстовые файлы (*.txt)|*.txt
+
+en: Select exactly one profile.
+ru: Выберите ровно один профиль.
+
+en: Export Xray configuration (the file will contain the credentials of the profile)
+ru: Экспорт конфигурации Xray (файл будет содержать учётные данные профиля)
+
+en: JSON files (*.json)|*.json
+ru: Файлы JSON (*.json)|*.json
+
+en: Xray configuration exported to a file.
+ru: Конфигурация Xray экспортирована в файл.
+
+en: The configuration could not be exported: {0}
+ru: Не удалось экспортировать конфигурацию: {0}
+
+en: A test is already running.
+ru: Тест уже выполняется.
+
+en: The URL test needs the core, which cannot run on this system:\n\n{0}
+ru: Для URL-теста нужно ядро, а оно не может работать в этой системе:\n\n{0}
+
+en: The URL test needs xray.exe next to the program.
+ru: Для URL-теста нужен xray.exe рядом с программой.
+
+en: URL test started for {0} profile(s).
+ru: URL-тест запущен для профилей: {0}.
+
+en: TCP ping started for {0} profile(s).
+ru: TCP-пинг запущен для профилей: {0}.
+
+en: Test finished: {0} of {1} profile(s).
+ru: Тест завершён: {0} из {1} профилей.
+
+en: Testing {0}/{1}
+ru: Тестирование {0}/{1}
+
+en: This group has no subscription address.\n\nUse Add with the subscription address, or set the address of this group in Preferences - Groups.
+ru: У этой группы нет адреса подписки.\n\nДобавьте адрес подписки через «Добавить» или укажите адрес этой группы в «Параметры — Группы».
+
+en: There are no subscriptions yet. Use Add with the subscription address.
+ru: Подписок пока нет. Добавьте адрес подписки через «Добавить».
+
+en: Subscription "{0}" is already being updated.
+ru: Подписка "{0}" уже обновляется.
+
+en: Updating subscription "{0}" {1}{2}, with the HWID...
+ru: Обновление подписки "{0}" {1}{2}, с HWID...
+
+en: Updating subscription "{0}" {1}{2}...
+ru: Обновление подписки "{0}" {1}{2}...
+
+en: (through the active connection)
+ru: (через активное подключение)
+
+en: The subscription contains no supported profiles ({0} entries could not be used).
+ru: В подписке нет поддерживаемых профилей (непригодных записей: {0}).
+
+en: The subscription contains no supported profiles.
+ru: В подписке нет поддерживаемых профилей.
+
+en: If the provider limits devices (Happ-compatible panels), switch on Server - Subscription - Use Happ-compatible HWID for this subscription.
+ru: Если провайдер ограничивает число устройств (панели, совместимые с Happ), включите «Сервер — Подписка — Использовать HWID, совместимый с Happ, для этой подписки».
+
+en: Subscription "{0}" was NOT updated; its profiles are kept. {1}
+ru: Подписка "{0}" НЕ обновлена; её профили сохранены. {1}
+
+en: The subscription "{0}" was not updated; the existing profiles are kept.\n\n{1}
+ru: Подписка "{0}" не обновлена; существующие профили сохранены.\n\n{1}
+
+en: Subscription "{0}" was not updated. See the log.
+ru: Подписка "{0}" не обновлена. Подробности — в журнале.
+
+en: Subscription "{0}" updated ({1}): {2}; {3} entr(ies) not supported.
+ru: Подписка "{0}" обновлена ({1}): {2}; неподдерживаемых записей: {3}.
+
+en: Subscription "{0}" updated ({1}): {2}.
+ru: Подписка "{0}" обновлена ({1}): {2}.
+
+en: The running profile is no longer in the subscription. It keeps running until you stop it or start another one.
+ru: Работающего профиля больше нет в подписке. Он работает, пока вы его не остановите или не запустите другой.
+
+en: Open the tab of the subscription first.\n\nTo add links from a file use Add - Open file.
+ru: Сначала откройте вкладку подписки.\n\nЧтобы добавить ссылки из файла, используйте «Добавить — Открыть файл».
+
+en: Import the content of subscription "{0}" from a file
+ru: Импорт содержимого подписки "{0}" из файла
+
+en: The file is larger than 5 MB.
+ru: Файл больше 5 МБ.
+
+en: The file contains no supported profiles.
+ru: В файле нет поддерживаемых профилей.
+
+en: Nothing was imported; the existing profiles are kept.
+ru: Ничего не импортировано; существующие профили сохранены.
+
+en: from a file
+ru: из файла
+
+en: Export all profiles (the file will contain the credentials of the profiles)
+ru: Экспорт всех профилей (файл будет содержать учётные данные профилей)
+
+en: Profile backup (*.xml)|*.xml
+ru: Резервная копия профилей (*.xml)|*.xml
+
+en: Profile backup exported: {0} profile(s).
+ru: Резервная копия профилей экспортирована: профилей {0}.
+
+en: The backup could not be written: {0}
+ru: Не удалось записать резервную копию: {0}
+
+en: Import a profile backup (profiles are added; nothing is replaced)
+ru: Импорт резервной копии профилей (профили добавляются, ничего не заменяется)
+
+en: Profile backup (*.xml)|*.xml|All files (*.*)|*.*
+ru: Резервная копия профилей (*.xml)|*.xml|Все файлы (*.*)|*.*
+
+en: Profile backup imported: {0} profile(s), {1} new group(s).
+ru: Резервная копия импортирована: профилей {0}, новых групп {1}.
+
+en: Imported with a warning:
+ru: Импортировано с предупреждением:
+
+en: Diagnostic info copied to the clipboard (no addresses, ids or keys).
+ru: Сведения для диагностики скопированы в буфер обмена (без адресов, идентификаторов и ключей).
+
+en: The system proxy settings were changed outside this program. They are left as they are; System Proxy is switched off here.
+ru: Настройки системного прокси изменены вне этой программы. Они оставлены как есть; системный прокси здесь выключен.
+
+en: ERROR in a background task: {0}: {1}
+ru: ОШИБКА в фоновой задаче: {0}: {1}
+
+en: New profile - {0}
+ru: Новый профиль — {0}
+
+en: Edit profile - {0}
+ru: Изменить профиль — {0}
+
+en: Port
+ru: Порт
+
+en: User name
+ru: Имя пользователя
+
+en: Password
+ru: Пароль
+
+en: Security (cipher)
+ru: Защита (шифр)
+
+en: Method
+ru: Метод
+
+en: Flow
+ru: Flow
+
+en: (none)
+ru: (нет)
+
+en: Transport
+ru: Транспорт
+
+en: Host
+ru: Host
+
+en: Path / service name
+ru: Путь / имя сервиса
+
+en: Security
+ru: Защита
+
+en: ALPN (comma separated)
+ru: ALPN (через запятую)
+
+en: uTLS fingerprint
+ru: Отпечаток uTLS
+
+en: Allow insecure (do not verify the certificate)
+ru: Разрешить небезопасное (не проверять сертификат)
+
+en: Reality public key
+ru: Открытый ключ Reality
+
+en: Reality short id
+ru: Короткий id Reality
+
+en: Settings
+ru: Настройки
+
+en: General
+ru: Общие
+
+en: Connections
+ru: Подключения
+
+en: Subscriptions
+ru: Подписки
+
+en: Routing & DNS
+ru: Маршрутизация и DNS
+
+en: Language
+ru: Язык
+
+en: The language changes when the program is started again.
+ru: Язык изменится при следующем запуске программы.
+
+en: Closing the window hides it to the tray
+ru: Закрытие окна сворачивает его в трей
+
+en: Latency test URL (http://)
+ru: URL теста задержки (http://)
+
+en: Test timeout, seconds
+ru: Тайм-аут теста, с
+
+en: Start with Windows and Remember last profile are in the Program menu.
+ru: «Запускать вместе с системой» и «Запоминать последний профиль» находятся в меню «Программа».
+
+en: SOCKS5 listen port
+ru: Порт SOCKS5
+
+en: HTTP listen port
+ru: Порт HTTP
+
+en: The HTTP port is the one used as the Windows system proxy.
+ru: Порт HTTP используется как системный прокси Windows.
+
+en: If Windows refuses a port (WSAEACCES, reserved range), choose another, e.g. 10808/10809.
+ru: Если Windows не разрешает порт (WSAEACCES, зарезервированный диапазон), выберите другой, например 10808/10809.
+
+en: System proxy exceptions
+ru: Исключения системного прокси
+
+en: Exceptions are separated by semicolons; <local> means names without dots.
+ru: Исключения разделяются точкой с запятой; <local> означает имена без точек.
+
+en: Download subscriptions
+ru: Загружать подписки
+
+en: Automatically (through the connection if active)
+ru: Автоматически (через подключение, если оно есть)
+
+en: Only through the active connection
+ru: Только через активное подключение
+
+en: Directly
+ru: Напрямую
+
+en: Downloads never use the Windows system proxy, so they cannot loop through this program.
+ru: Загрузка никогда не использует системный прокси Windows, поэтому не может зациклиться через эту программу.
+
+en: Automatically: when the connection fails before the server answers, once more directly.
+ru: Автоматически: если подключение не сработало до ответа сервера, ещё одна попытка напрямую.
+
+en: Custom HWID (optional)
+ru: Свой HWID (необязательно)
+
+en: Only a HWID that the provider authorised for you; empty uses the HWID of this installation.
+ru: Только HWID, разрешённый вам провайдером; пусто — используется HWID этой установки.
+
+en: The HWID is sent only for subscriptions where "Use Happ-compatible HWID" is on.
+ru: HWID отправляется только для подписок, где включено «Использовать HWID, совместимый с Happ».
+
+en: Make a new HWID for this installation
+ru: Создать новый HWID для этой установки
+
+en: Default outbound
+ru: Исходящее по умолчанию
+
+en: Domain strategy
+ru: Стратегия доменов
+
+en: Connect to private (LAN) addresses directly
+ru: Подключаться к частным (LAN) адресам напрямую
+
+en: One rule per line, Xray syntax: domain:example.com, full:..., regexp:..., geosite:cn, 10.0.0.0/8, geoip:cn
+ru: Одно правило на строку, синтаксис Xray: domain:example.com, full:..., regexp:..., geosite:cn, 10.0.0.0/8, geoip:cn
+
+en: geosite: and geoip: rules need geosite.dat / geoip.dat next to xray.exe.
+ru: Правилам geosite: и geoip: нужны geosite.dat / geoip.dat рядом с xray.exe.
+
+en: Direct domains
+ru: Домены напрямую
+
+en: Direct IP
+ru: IP напрямую
+
+en: Proxy domains
+ru: Домены через прокси
+
+en: Proxy IP
+ru: IP через прокси
+
+en: Block domains
+ru: Блокировать домены
+
+en: Block IP
+ru: Блокировать IP
+
+en: Remote DNS
+ru: Удалённый DNS
+
+en: Examples: 8.8.8.8, https://8.8.8.8/dns-query, tcp://1.1.1.1. Empty: no DNS section, names are resolved by the remote server (and by Windows for direct connections).
+ru: Примеры: 8.8.8.8, https://8.8.8.8/dns-query, tcp://1.1.1.1. Пусто: раздела DNS нет, имена определяет удалённый сервер (и Windows для прямых подключений).
+
+en: Direct DNS
+ru: Прямой DNS
+
+en: Used for the "Direct domains" list when Remote DNS is set. "localhost" means the system resolver.
+ru: Используется для списка «Домены напрямую», когда задан удалённый DNS. "localhost" — системный резолвер.
+
+en: Xray uses its DNS only when the domain strategy is not AsIs.
+ru: Xray использует свой DNS, только если стратегия доменов не AsIs.
+
+en: Core log level
+ru: Уровень журнала ядра
+
+en: The core log is shown in the window only; it is never written to disk.
+ru: Журнал ядра показывается только в окне и никогда не записывается на диск.
+
+en: Program log: {0}
+ru: Журнал программы: {0}
+
+en: Preferences - Diagnostics checks the program files, certificates and ports.
+ru: «Параметры — Диагностика» проверяет файлы программы, сертификаты и порты.
+
+en: HWID of this installation: {0} (random, made once, not taken from the hardware)
+ru: HWID этой установки: {0} (случайный, создан один раз, не берётся из оборудования)
+
+en: Make a new HWID for this installation?\n\nProviders that limit devices will see this computer as a new device; the old one may have to be removed in the provider's panel or bot. The new HWID is kept when you press OK.
+ru: Создать новый HWID для этой установки?\n\nПровайдеры, ограничивающие число устройств, увидят этот компьютер как новое устройство; старое может понадобиться удалить в панели или боте провайдера. Новый HWID сохранится после нажатия «ОК».
+
+en: The SOCKS5 and HTTP ports must be different.
+ru: Порты SOCKS5 и HTTP должны различаться.
+
+en: Custom HWID: {0}
+ru: Свой HWID: {0}
+
+en: The latency test URL must be a valid address that starts with http://\n(HTTPS test addresses cannot be used by this program).
+ru: URL теста задержки должен быть корректным адресом, начинающимся с http://\n(адреса тестов HTTPS эта программа использовать не может).

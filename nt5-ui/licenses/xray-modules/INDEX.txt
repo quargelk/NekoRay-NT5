@@ -1,0 +1,46 @@
+Go modules linked into xray.exe (from its embedded build information), with their license files.
+
+github.com/aead/chacha20                      v0.0.0-20180709150244-8b13a72661da       MIT           github.com_aead_chacha20.txt
+github.com/andybalholm/brotli                 v1.0.5                                   MIT           github.com_andybalholm_brotli.txt
+github.com/dgryski/go-metro                   v0.0.0-20211217172704-adc40b04c140       MIT           github.com_dgryski_go-metro.txt
+github.com/francoispqt/gojay                  v1.2.13                                  MIT           github.com_francoispqt_gojay.txt
+github.com/gaukas/godicttls                   v0.0.3                                   BSD-3-Clause  github.com_gaukas_godicttls.txt
+github.com/ghodss/yaml                        v1.0.1-0.20220118164431-d8423dcdf344     MIT           github.com_ghodss_yaml.txt
+github.com/golang/protobuf                    v1.5.3                                   BSD-3-Clause  github.com_golang_protobuf.txt
+github.com/google/btree                       v1.1.2                                   Apache-2.0    github.com_google_btree.txt
+github.com/gorilla/websocket                  v1.5.0                                   BSD-2-Clause  github.com_gorilla_websocket.txt
+github.com/klauspost/compress                 v1.16.6                                  Apache-2.0    github.com_klauspost_compress.txt
+github.com/klauspost/cpuid/v2                 v2.2.5                                   MIT           github.com_klauspost_cpuid_v2.txt
+github.com/pelletier/go-toml                  v1.9.5                                   Apache-2.0    github.com_pelletier_go-toml.txt
+github.com/pires/go-proxyproto                v0.7.0                                   Apache-2.0    github.com_pires_go-proxyproto.txt
+github.com/quic-go/qtls-go1-20                v0.2.2                                   BSD-3-Clause  github.com_quic-go_qtls-go1-20.txt
+github.com/quic-go/quic-go                    v0.36.1                                  MIT           github.com_quic-go_quic-go.txt
+github.com/refraction-networking/utls         v1.3.2                                   BSD-3-Clause  github.com_refraction-networking_utls.txt
+github.com/riobard/go-bloom                   v0.0.0-20200614022211-cdc8013cb5b3       Apache-2.0    github.com_riobard_go-bloom.txt
+github.com/sagernet/sing                      v0.2.7                                   GPL-family    github.com_sagernet_sing.txt
+github.com/sagernet/sing-shadowsocks          v0.2.2                                   GPL-family    github.com_sagernet_sing-shadowsocks.txt
+github.com/sagernet/wireguard-go              v0.0.0-20221116151939-c99467f53f2c       MIT           github.com_sagernet_wireguard-go.txt
+github.com/seiflotfy/cuckoofilter             v0.0.0-20220411075957-e3b120b3f5fb       MIT           github.com_seiflotfy_cuckoofilter.txt
+github.com/v2fly/ss-bloomring                 v0.0.0-20210312155135-28617310f63e       Apache-2.0    github.com_v2fly_ss-bloomring.txt
+github.com/xtls/reality                       v0.0.0-20230613075828-e07c3b04b983       MPL-2.0       github.com_xtls_reality.txt
+go.uber.org/atomic                            v1.11.0                                  MIT           go.uber.org_atomic.txt
+golang.org/x/crypto                           v0.10.0                                  BSD-3-Clause  golang.org_x_crypto.txt
+golang.org/x/exp                              v0.0.0-20230522175609-2e198f4a06a1       BSD-3-Clause  golang.org_x_exp.txt
+golang.org/x/net                              v0.11.0                                  BSD-3-Clause  golang.org_x_net.txt
+golang.org/x/sys                              v0.9.0                                   BSD-3-Clause  golang.org_x_sys.txt
+golang.org/x/text                             v0.10.0                                  BSD-3-Clause  golang.org_x_text.txt
+golang.org/x/time                             v0.3.0                                   BSD-3-Clause  golang.org_x_time.txt
+google.golang.org/genproto/googleapis/rpc     v0.0.0-20230530153820-e85fd2cbaebc       Apache-2.0    google.golang.org_genproto_googleapis_rpc.txt
+google.golang.org/grpc                        v1.56.1                                  Apache-2.0    google.golang.org_grpc.txt
+google.golang.org/protobuf                    v1.31.0                                  BSD-3-Clause  google.golang.org_protobuf.txt
+gopkg.in/yaml.v2                              v2.4.0                                   Apache-2.0    gopkg.in_yaml.v2.txt
+gvisor.dev/gvisor                             v0.0.0-20220901235040-6ca97ef2ce1c       Apache-2.0    gvisor.dev_gvisor.txt
+lukechampine.com/blake3                       v1.2.1                                   MIT           lukechampine.com_blake3.txt
+github.com/sagernet/wireguard-go             v0.0.0-20221116151939-c99467f53f2c       MIT           github.com_sagernet_wireguard-go.txt
+    (built from a local copy with a one-line change for Windows XP: third_party/wireguard-go-nt5-xp.patch)
+
+NOTICE files (Apache-2.0, section 4d): google.golang.org_grpc.NOTICE.txt, gopkg.in_yaml.v2.NOTICE.txt.
+GPL-3.0-or-later modules: github.com/sagernet/sing, github.com/sagernet/sing-shadowsocks (full GPL-3.0
+text: ../NekoRayNT5-GPL-3.0.txt). Our reading (not legal advice): xray.exe as a whole can only be
+distributed under GPL-3.0 terms, which MPL-2.0 allows (MPL-2.0 section 3.3), together with its complete
+corresponding source; see ../THIRD-PARTY.txt.

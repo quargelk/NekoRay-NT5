@@ -1,0 +1,11 @@
+--- a/ipc/uapi_windows.go
++++ b/ipc/uapi_windows.go
+@@ -53,7 +53,7 @@
+ 
+ func init() {
+ 	var err error
+-	UAPISecurityDescriptor, err = windows.SecurityDescriptorFromString("O:SYD:P(A;;GA;;;SY)(A;;GA;;;BA)S:(ML;;NWNRNX;;;HI)")
++	UAPISecurityDescriptor, err = windows.SecurityDescriptorFromString("O:SYD:P(A;;GA;;;SY)(A;;GA;;;BA)")
+ 	if err != nil {
+ 		panic(err)
+ 	}

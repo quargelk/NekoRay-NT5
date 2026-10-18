@@ -1,0 +1,55 @@
+NekoRay NT5 - components and licenses
+=====================================
+
+This is a technical list, not legal advice.
+
+About NekoRay NT5
+  NekoRay NT5 is an independent, community-maintained fork and adaptation of NekoRay for Windows XP
+  SP3 and Windows 2000 SP4 (x86). It is not an official NekoRay release and is not endorsed by the
+  NekoRay maintainers. Its NT5-specific implementation and compatibility work are specific to this
+  project and are not part of any upstream NekoRay release.
+  Original project: NekoRay, https://github.com/MatsuriDayo/nekoray, license GPL-3.0.
+
+Project license
+  NekoRay NT5 is licensed under GPL-3.0 (NekoRayNT5-GPL-3.0.txt; LICENSE in the source repository),
+  except where a component or file has a separately documented license, as listed below.
+  Third-party components remain under their own licenses.
+
+NekoRayNT5.exe (the program)
+  License: GPL-3.0 (NekoRayNT5-GPL-3.0.txt). Source: the nt5-ui folder of the NekoRay NT5 repository.
+
+nt5helper.exe - helper of NekoRay NT5 (HTTPS subscription downloads)
+  License: GPL-3.0 (part of NekoRay NT5). Source: nt5-ui/helper.
+  Uses only the Go standard library (see below); no other modules.
+
+xray.exe - Xray-core 1.8.3 (Project X), windows/386
+  License of Xray-core: MPL-2.0 (Xray-core-MPL-2.0.txt).
+  Source: https://github.com/MatsuriDayo/Xray-core, commit f6843e4e1442341e88ac34c09ca2d243cdcc09f6,
+  with two small changes for Windows XP (nt5-ui/third_party: a go.mod replace and a one-line change
+  of github.com/sagernet/wireguard-go), built with the Go toolchain described below.
+  It links 36 Go modules (MIT, BSD-2/3-Clause, Apache-2.0, MPL-2.0 and GPL-3.0-or-later). Their
+  license texts and NOTICE files are in the folder xray-modules (INDEX.txt lists them).
+  Because GPL-3.0-or-later modules (github.com/sagernet/sing, sing-shadowsocks) are linked in,
+  xray.exe as a whole is distributed under GPL-3.0 terms; its complete corresponding source is
+  described in nt5-ui/third_party/README.md of the source repository.
+
+Go runtime and standard library (in xray.exe and nt5helper.exe)
+  License: BSD-3-Clause, Copyright (c) 2009 The Go Authors (Go-BSD-3-Clause.txt).
+  Go 1.20 with backports for Windows XP (NT 5.1): https://github.com/BieHDC/go-backports,
+  release go1.20-nt51 (a fork of https://github.com/golang/go under the same license).
+
+Windows 2000 (NT 5.0) compatibility patch for that toolchain
+  nt5-ui/third_party/go1.20-nt51-nt50.patch of the source repository. It is NT5-specific: not part
+  of upstream Go, of the go1.20-nt51 backport or of the original NekoRay. It is distributed under
+  the BSD-3-Clause terms of Go (Go-BSD-3-Clause.txt), not under GPL-3.0. Its changes to existing Go
+  files keep their Go Authors notices; its five new files carry no copyright line and refer to the
+  Go LICENSE. It was developed with Claude Code (an AI coding assistant) under the direction of the
+  NekoRay NT5 maintainer. No separate copyright holder is claimed for these additions.
+  Details: nt5-ui/third_party/README.md.
+
+cacert.pem - Mozilla CA certificate bundle, as published by the curl project
+  License: MPL-2.0 (same text as Xray-core-MPL-2.0.txt).
+  Source: https://curl.se/docs/caextract.html (data of Mozilla NSS).
+
+Not included, installed separately by the user if wanted:
+  geoip.dat / geosite.dat for routing rules (Loyalsoldier / v2fly projects).

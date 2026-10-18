@@ -1,0 +1,3 @@
+# Keep every file byte for byte as committed: the patches, shell scripts, cacert.pem, the embedded
+# translation table and the license texts must not get other line endings on checkout (core.autocrlf).
+* -text

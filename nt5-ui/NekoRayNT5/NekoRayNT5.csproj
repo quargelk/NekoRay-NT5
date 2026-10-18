@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+  NekoRay NT5 shell: C# Windows Forms application, Visual Studio 2010 project.
+  Target: .NET Framework 2.0, x86. Do not raise the target framework and do not
+  add NuGet packages or references to assemblies newer than .NET 2.0.
+-->
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6B0F6C1E-5A0B-4E57-9B43-2D8C1F7A4E21}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NekoRayNT5</RootNamespace>
+    <AssemblyName>NekoRayNT5</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <!-- The compiler rejects syntax newer than C# 2.0. -->
+    <LangVersion>ISO-2</LangVersion>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <!-- no .pdb: it would also write the local build path into NekoRayNT5.exe -->
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App\AppInfo.cs" />
+    <Compile Include="App\DiagLog.cs" />
+    <Compile Include="App\AppPaths.cs" />
+    <Compile Include="App\Lang.cs" />
+    <Compile Include="Core\ChildPidFile.cs" />
+    <Compile Include="Core\CoreController.cs" />
+    <Compile Include="Core\CoreLauncher.cs" />
+    <Compile Include="Core\CoreProcess.cs" />
+    <Compile Include="Core\ExecutableCheck.cs" />
+    <Compile Include="Core\JobObject.cs" />
+    <Compile Include="Core\LegacyCleanup.cs" />
+    <Compile Include="Model\AppSettings.cs" />
+    <Compile Include="Model\ProfileEntry.cs" />
+    <Compile Include="Model\ProfileGroup.cs" />
+    <Compile Include="Platform\AutoStart.cs" />
+    <Compile Include="Platform\TcpTable.cs" />
+    <Compile Include="Platform\WinInetProxy.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AddSource.cs" />
+    <Compile Include="Services\CaBundle.cs" />
+    <Compile Include="Services\Dependencies.cs" />
+    <Compile Include="Services\Hwid.cs" />
+    <Compile Include="Services\Json.cs" />
+    <Compile Include="Services\LinkProblems.cs" />
+    <Compile Include="Services\LatencyTester.cs" />
+    <Compile Include="Services\PercentEncoding.cs" />
+    <Compile Include="Services\ProfileKey.cs" />
+    <Compile Include="Services\ProfileStore.cs" />
+    <Compile Include="Services\ProfileValidator.cs" />
+    <Compile Include="Services\SafeFile.cs" />
+    <Compile Include="Services\SettingsStore.cs" />
+    <Compile Include="Services\ShareLinks.cs" />
+    <Compile Include="Services\Subscription.cs" />
+    <Compile Include="Services\SubscriptionClient.cs" />
+    <Compile Include="Services\SystemProxyManager.cs" />
+    <Compile Include="Services\XrayConfigBuilder.cs" />
+    <Compile Include="UI\GroupsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\AddForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\DiagnosticsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ProfileEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\SettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\UiHelpers.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- interface translations, see App\Lang.cs -->
+    <EmbeddedResource Include="Lang\ru.txt">
+      <LogicalName>NekoRayNT5.Lang.ru.txt</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!--
+    Puts the core and the helpers (..\runtime\*, see README.txt there) next to the program, so that F5
+    starts a build that can connect. cacert.pem (Mozilla CA bundle, kept in Git) is copied by name, so
+    HTTPS subscriptions on Windows XP never depend on its outdated root store.
+    Release also assembles the package to copy to the target system: $(OutDir)package\ holds only
+    the files the program needs (no .pdb, no .vshost.exe).
+  -->
+  <Target Name="AfterBuild">
+    <ItemGroup>
+      <RuntimeFiles Include="$(MSBuildProjectDirectory)\..\runtime\*.*" Exclude="$(MSBuildProjectDirectory)\..\runtime\README.txt;$(MSBuildProjectDirectory)\..\runtime\cacert.pem" />
+      <CaBundleFile Include="$(MSBuildProjectDirectory)\..\runtime\cacert.pem" />
+    </ItemGroup>
+    <Copy SourceFiles="@(RuntimeFiles)" DestinationFolder="$(OutDir)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(CaBundleFile)" DestinationFolder="$(OutDir)" Condition="Exists('$(MSBuildProjectDirectory)\..\runtime\cacert.pem')" />
+    <Warning Condition="!Exists('$(OutDir)xray.exe')" Text="xray.exe is not in $(OutDir): the program will start but cannot connect. Put xray.exe into nt5-ui\runtime (see README.txt there)." />
+    <Warning Condition="!Exists('$(OutDir)nt5helper.exe')" Text="nt5helper.exe is not in $(OutDir): HTTPS subscriptions then need curl.exe. Build it with nt5-ui\helper\build.cmd (see runtime\README.txt)." />
+    <Warning Condition="!Exists('$(OutDir)cacert.pem')" Text="cacert.pem is not in $(OutDir): HTTPS subscriptions on Windows XP will fail with an unknown certificate authority. Restore nt5-ui\runtime\cacert.pem from Git." />
+    <ItemGroup Condition="'$(Configuration)' == 'Release'">
+      <PackageFiles Include="$(OutDir)$(TargetFileName);@(RuntimeFiles->'$(OutDir)%(Filename)%(Extension)');@(CaBundleFile->'$(OutDir)%(Filename)%(Extension)')" />
+    </ItemGroup>
+    <ItemGroup Condition="'$(Configuration)' == 'Release'">
+      <PackageDocs Include="$(MSBuildProjectDirectory)\..\dist\README.txt" />
+      <PackageLicenses Include="$(MSBuildProjectDirectory)\..\licenses\**\*.txt" />
+    </ItemGroup>
+    <RemoveDir Condition="'$(Configuration)' == 'Release'" Directories="$(OutDir)package" />
+    <Copy Condition="'$(Configuration)' == 'Release'" SourceFiles="@(PackageFiles);@(PackageDocs)" DestinationFolder="$(OutDir)package" />
+    <Copy Condition="'$(Configuration)' == 'Release'" SourceFiles="@(PackageLicenses)" DestinationFiles="@(PackageLicenses->'$(OutDir)package\licenses\%(RecursiveDir)%(Filename)%(Extension)')" />
+  </Target>
+</Project>

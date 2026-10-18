@@ -1,84 +1,49 @@
-# This file is used to ignore files which are generated
-# ----------------------------------------------------------------------------
+# NekoRay NT5: generated and local files (sources, scripts, patches, licenses and cacert.pem are kept)
 
-*~
-*.autosave
-*.a
-*.core
-*.moc
-*.o
-*.obj
-*.orig
-*.rej
-*.so
-*.so.*
-*_pch.h.cpp
-*_resource.rc
-.#*
-*.*#
-core
-!core/
-tags
-.DS_Store
-.directory
-*.debug
-/Makefile*
-*.prl
-*.app
-moc_*.cpp
-ui_*.h
-qrc_*.cpp
-Thumbs.db
-*.res
-/.qmake.cache
-/.qmake.stash
-
-# qtcreator generated files
-*.pro.user*
-
-# xemacs temporary files
-*.flc
-
-# Vim temporary files
-.*.swp
-
-# Visual Studio generated files
-*.ib_pdb_index
-*.idb
-*.ilk
-*.pdb
-*.sln
+# Visual Studio / MSBuild output
+bin/
+obj/
+.vs/
 *.suo
-*.vcproj
-*vcproj.*.*.user
+*.user
+*.cache
+*.pdb
+*.vshost.exe*
 *.ncb
 *.sdf
 *.opensdf
-*.vcxproj
-*vcxproj.*
+ipch/
 
-# MinGW generated files
-*.Debug
-*.Release
-
-# Python byte code
-*.pyc
-
-# Binaries
-# --------
-*.dll
+# Built binaries and archives: built from source, not stored (see BUILDING.md)
 *.exe
+*.dll
+*.zip
+*.7z
+*.tar
+*.tar.gz
+*.tgz
 
-# Custom
-/nekoray
-/build
-CMakeLists.txt.user*
-/cmake-build-*
-/build-*
-.vscode
-.idea
+# Go: test binaries, local toolchain, work folders of nt5-ui/third_party/build-xray.sh
+*.test
+toolchain/
+Xray-core/
+wireguard-go-nt5/
 
-# Deploy
-/deployment
-/neko*.sh
-/qtsdk
+# Logs, test output, temporary and backup files
+*.log
+*.tmp
+*.bak
+*.orig
+*.rej
+*~
+*.pyc
+__pycache__/
+SHA256SUMS.txt
+
+# Editors, operating system, local tool settings
+.vscode/
+.idea/
+.claude/
+Thumbs.db
+Desktop.ini
+.DS_Store
